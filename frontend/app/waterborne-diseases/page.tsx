@@ -27,8 +27,8 @@ const AllIndiaDiseases = () => {
       prevention: ['BCG vaccination', 'Early detection', 'Complete treatment course', 'Proper ventilation', 'Mask wearing'],
       topStates: ['Uttar Pradesh', 'Maharashtra', 'Madhya Pradesh', 'West Bengal', 'Bihar'],
       trend: 'decreasing',
-      source: 'National TB Elimination Programme',
-      sourceUrl: 'https://tbcindia.gov.in/'
+      source: 'WHO India - Tuberculosis',
+      sourceUrl: 'https://www.who.int/india'
     },
     {
       id: 'dengue',
@@ -46,7 +46,7 @@ const AllIndiaDiseases = () => {
       topStates: ['Tamil Nadu', 'Karnataka', 'Kerala', 'Maharashtra', 'Delhi'],
       trend: 'stable',
       source: 'NVBDCP Annual Report 2023',
-      sourceUrl: 'https://nvbdcp.gov.in/'
+      sourceUrl: 'https://ncvbdc.mohfw.gov.in/'
     },
     {
       id: 'malaria',
@@ -64,7 +64,7 @@ const AllIndiaDiseases = () => {
       topStates: ['Odisha', 'Chhattisgarh', 'Jharkhand', 'Madhya Pradesh', 'Maharashtra'],
       trend: 'decreasing',
       source: 'NVBDCP Malaria Report',
-      sourceUrl: 'https://nvbdcp.gov.in/index4.php?lang=1&level=0&linkid=431&lid=3699'
+      sourceUrl: 'https://ncvbdc.mohfw.gov.in/index1.php?lang=1&level=1&sublinkid=5784&lid=3689'
     },
     {
       id: 'typhoid',
@@ -81,8 +81,8 @@ const AllIndiaDiseases = () => {
       prevention: ['Typhoid vaccination', 'Safe drinking water', 'Food hygiene', 'Hand washing', 'Proper sanitation'],
       topStates: ['Uttar Pradesh', 'Bihar', 'Delhi', 'West Bengal', 'Rajasthan'],
       trend: 'stable',
-      source: 'IDSP Weekly Reports',
-      sourceUrl: 'https://idsp.nic.in/'
+      source: 'HMIS Health Data Portal',
+      sourceUrl: 'https://hmis.mohfw.gov.in'
     },
     {
       id: 'cholera',
@@ -99,8 +99,8 @@ const AllIndiaDiseases = () => {
       prevention: ['Safe drinking water', 'Proper sanitation', 'Oral cholera vaccine', 'Food safety', 'Hand hygiene'],
       topStates: ['West Bengal', 'Odisha', 'Maharashtra', 'Tamil Nadu', 'Kerala'],
       trend: 'decreasing',
-      source: 'IDSP Cholera Surveillance',
-      sourceUrl: 'https://idsp.nic.in/'
+      source: 'HMIS Health Data Portal',
+      sourceUrl: 'https://hmis.mohfw.gov.in'
     },
     {
       id: 'hepatitis',
@@ -118,7 +118,7 @@ const AllIndiaDiseases = () => {
       topStates: ['Uttar Pradesh', 'Bihar', 'West Bengal', 'Jharkhand', 'Odisha'],
       trend: 'stable',
       source: 'NCDC Hepatitis Surveillance',
-      sourceUrl: 'https://ncdc.gov.in/'
+      sourceUrl: 'https://ncdc.mohfw.gov.in/'
     },
     {
       id: 'chikungunya',
@@ -136,7 +136,7 @@ const AllIndiaDiseases = () => {
       topStates: ['Karnataka', 'Maharashtra', 'Gujarat', 'Delhi', 'Telangana'],
       trend: 'stable',
       source: 'NVBDCP Chikungunya Data',
-      sourceUrl: 'https://nvbdcp.gov.in/'
+      sourceUrl: 'https://ncvbdc.mohfw.gov.in/'
     },
     {
       id: 'japanese-encephalitis',
@@ -154,7 +154,7 @@ const AllIndiaDiseases = () => {
       topStates: ['Assam', 'Uttar Pradesh', 'Bihar', 'West Bengal', 'Tamil Nadu'],
       trend: 'decreasing',
       source: 'NVBDCP JE Programme',
-      sourceUrl: 'https://nvbdcp.gov.in/'
+      sourceUrl: 'https://ncvbdc.mohfw.gov.in/'
     },
     {
       id: 'diarrheal-diseases',
@@ -171,8 +171,8 @@ const AllIndiaDiseases = () => {
       prevention: ['Safe drinking water', 'Hand washing', 'Food safety', 'Breastfeeding', 'ORS availability'],
       topStates: ['Uttar Pradesh', 'Bihar', 'Madhya Pradesh', 'Rajasthan', 'Jharkhand'],
       trend: 'stable',
-      source: 'IDSP Diarrheal Disease Surveillance',
-      sourceUrl: 'https://idsp.nic.in/'
+      source: 'HMIS Health Data Portal',
+      sourceUrl: 'https://hmis.mohfw.gov.in'
     },
     {
       id: 'leptospirosis',
@@ -190,7 +190,7 @@ const AllIndiaDiseases = () => {
       topStates: ['Kerala', 'Tamil Nadu', 'Karnataka', 'Maharashtra', 'Andaman & Nicobar'],
       trend: 'increasing',
       source: 'State Health Departments',
-      sourceUrl: 'https://www.nhp.gov.in/'
+      sourceUrl: 'https://mohfw.gov.in/'
     }
   ]
 
@@ -446,12 +446,12 @@ const AllIndiaDiseases = () => {
                 </BarChart>
               </ResponsiveContainer>
               <a
-                href="https://idsp.nic.in/"
+                href="https://hmis.mohfw.gov.in"
                 target="_blank"
                 rel="noopener noreferrer"
                 className="text-xs text-primary-600 hover:underline inline-flex items-center gap-1 mt-4"
               >
-                Source: IDSP Regional Reports
+                Source: HMIS Health Data Portal
                 <ExternalLink className="w-3 h-3" />
               </a>
             </motion.div>
@@ -488,12 +488,12 @@ const AllIndiaDiseases = () => {
               </LineChart>
             </ResponsiveContainer>
             <a
-              href="https://www.nhp.gov.in/"
+              href="https://hmis.mohfw.gov.in"
               target="_blank"
               rel="noopener noreferrer"
               className="text-xs text-primary-600 hover:underline inline-flex items-center gap-1 mt-4"
             >
-              Source: National Health Portal & Disease Control Programmes
+              Source: HMIS Health Data Portal & Disease Control Programmes
               <ExternalLink className="w-3 h-3" />
             </a>
           </motion.div>

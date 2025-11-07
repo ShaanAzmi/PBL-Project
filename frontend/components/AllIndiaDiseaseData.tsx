@@ -45,8 +45,8 @@ const AllIndiaDiseaseData = () => {
       disease: 'Tuberculosis',
       cases: '280,000+',
       trend: 'decreasing',
-      source: 'National TB Elimination Programme',
-      sourceUrl: 'https://tbcindia.gov.in/'
+      source: 'WHO India - Tuberculosis',
+      sourceUrl: 'https://www.who.int/india'
     },
     {
       state: 'Maharashtra',
@@ -54,7 +54,7 @@ const AllIndiaDiseaseData = () => {
       cases: '15,000+',
       trend: 'stable',
       source: 'NVBDCP',
-      sourceUrl: 'https://nvbdcp.gov.in/'
+      sourceUrl: 'https://ncvbdc.mohfw.gov.in/'
     },
     {
       state: 'Odisha',
@@ -62,15 +62,15 @@ const AllIndiaDiseaseData = () => {
       cases: '45,000+',
       trend: 'decreasing',
       source: 'NVBDCP Annual Report',
-      sourceUrl: 'https://nvbdcp.gov.in/'
+      sourceUrl: 'https://ncvbdc.mohfw.gov.in/'
     },
     {
       state: 'West Bengal',
       disease: 'Cholera',
       cases: '3,200+',
       trend: 'stable',
-      source: 'IDSP',
-      sourceUrl: 'https://idsp.nic.in/'
+      source: 'HMIS Health Data Portal',
+      sourceUrl: 'https://hmis.mohfw.gov.in'
     },
     {
       state: 'Kerala',
@@ -86,7 +86,7 @@ const AllIndiaDiseaseData = () => {
       cases: '12,000+',
       trend: 'stable',
       source: 'NVBDCP Karnataka',
-      sourceUrl: 'https://nvbdcp.gov.in/'
+      sourceUrl: 'https://ncvbdc.mohfw.gov.in/'
     }
   ]
 
@@ -141,9 +141,9 @@ const AllIndiaDiseaseData = () => {
           <div className="mb-6">
             <h3 className="bold-24 text-gray-90 mb-2">Regional Disease Distribution</h3>
             <p className="regular-14 text-gray-50">Cases reported across different regions of India (2023)</p>
-            <a 
-              href="https://nvbdcp.gov.in/" 
-              target="_blank" 
+            <a
+              href="https://ncvbdc.mohfw.gov.in/"
+              target="_blank"
               rel="noopener noreferrer"
               className="text-xs text-primary-600 hover:underline inline-flex items-center gap-1 mt-2"
             >
@@ -188,13 +188,13 @@ const AllIndiaDiseaseData = () => {
             <div className="mb-6">
               <h3 className="bold-24 text-gray-90 mb-2">Disease Burden Distribution</h3>
               <p className="regular-14 text-gray-50">Total cases by disease type (2023)</p>
-              <a 
-                href="https://idsp.nic.in/" 
-                target="_blank" 
+              <a
+                href="https://hmis.mohfw.gov.in"
+                target="_blank"
                 rel="noopener noreferrer"
                 className="text-xs text-primary-600 hover:underline inline-flex items-center gap-1 mt-2"
               >
-                Source: IDSP Weekly Reports
+                Source: HMIS Health Data Portal
                 <svg className="w-3 h-3" fill="none" stroke="currentColor" viewBox="0 0 24 24">
                   <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M10 6H6a2 2 0 00-2 2v10a2 2 0 002 2h10a2 2 0 002-2v-4M14 4h6m0 0v6m0-6L10 14" />
                 </svg>
@@ -238,13 +238,13 @@ const AllIndiaDiseaseData = () => {
             <div className="mb-6">
               <h3 className="bold-24 text-gray-90 mb-2">5-Year Disease Trends</h3>
               <p className="regular-14 text-gray-50">Annual case trends (2019-2023)</p>
-              <a 
-                href="https://www.nhp.gov.in/" 
-                target="_blank" 
+              <a
+                href="https://mohfw.gov.in/"
+                target="_blank"
                 rel="noopener noreferrer"
                 className="text-xs text-primary-600 hover:underline inline-flex items-center gap-1 mt-2"
               >
-                Source: National Health Portal
+                Source: Ministry of Health & Family Welfare
                 <svg className="w-3 h-3" fill="none" stroke="currentColor" viewBox="0 0 24 24">
                   <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M10 6H6a2 2 0 00-2 2v10a2 2 0 002 2h10a2 2 0 002-2v-4M14 4h6m0 0v6m0-6L10 14" />
                 </svg>

@@ -17,7 +17,7 @@ const DiseaseStatistics = () => {
       impact: "High urban transmission during monsoon",
       year: "2023",
       source: "National Vector Borne Disease Control Programme",
-      sourceUrl: "https://nvbdcp.gov.in/",
+      sourceUrl: "https://ncvbdc.mohfw.gov.in/",
       color: "from-red-50 to-red-100",
       borderColor: "border-red-300"
     },
@@ -28,7 +28,7 @@ const DiseaseStatistics = () => {
       impact: "Endemic in tribal and forest areas",
       year: "2023",
       source: "NVBDCP Annual Report",
-      sourceUrl: "https://nvbdcp.gov.in/",
+      sourceUrl: "https://ncvbdc.mohfw.gov.in/",
       color: "from-yellow-50 to-yellow-100",
       borderColor: "border-yellow-300"
     },
@@ -49,8 +49,8 @@ const DiseaseStatistics = () => {
       cases: "3,200+ cases",
       impact: "Seasonal outbreaks in coastal regions",
       year: "2023",
-      source: "IDSP Weekly Reports",
-      sourceUrl: "https://idsp.nic.in/",
+      source: "HMIS Health Data Portal",
+      sourceUrl: "https://hmis.mohfw.gov.in",
       color: "from-teal-50 to-teal-100",
       borderColor: "border-teal-300"
     },
@@ -60,8 +60,8 @@ const DiseaseStatistics = () => {
       cases: "280,000+ cases",
       impact: "Highest TB burden state in India",
       year: "2023",
-      source: "National TB Elimination Programme",
-      sourceUrl: "https://tbcindia.gov.in/",
+      source: "WHO India - Tuberculosis",
+      sourceUrl: "https://www.who.int/india",
       color: "from-purple-50 to-purple-100",
       borderColor: "border-purple-300"
     },
@@ -71,8 +71,8 @@ const DiseaseStatistics = () => {
       cases: "5,600+ cases",
       impact: "Waterborne transmission in urban areas",
       year: "2023",
-      source: "Gujarat Health Department",
-      sourceUrl: "https://www.nhp.gov.in/",
+      source: "HMIS Health Data Portal",
+      sourceUrl: "https://hmis.mohfw.gov.in",
       color: "from-pink-50 to-pink-100",
       borderColor: "border-pink-300"
     },
@@ -83,7 +83,7 @@ const DiseaseStatistics = () => {
       impact: "Vector-borne epidemic in Bangalore",
       year: "2023",
       source: "NVBDCP Karnataka",
-      sourceUrl: "https://nvbdcp.gov.in/",
+      sourceUrl: "https://ncvbdc.mohfw.gov.in/",
       color: "from-orange-50 to-orange-100",
       borderColor: "border-orange-300"
     },
@@ -94,7 +94,7 @@ const DiseaseStatistics = () => {
       impact: "Endemic in rural and agricultural areas",
       year: "2023",
       source: "NVBDCP Northeast",
-      sourceUrl: "https://nvbdcp.gov.in/",
+      sourceUrl: "https://ncvbdc.mohfw.gov.in/",
       color: "from-green-50 to-green-100",
       borderColor: "border-green-300"
     },
