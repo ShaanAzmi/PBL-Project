@@ -3,7 +3,7 @@ export const NAV_LINKS = [
   { href: '/', key: 'home', label: 'Home' },
   { href: '/get-started', key: 'getStarted', label: 'Get Started' },
   { href: '#testimonials', key: 'testimonials', label: 'Testimonials' },
-  { href: '/statistics', key: 'statistics', label: 'Statistics' },
+  { href: '/waterborne-diseases', key: 'statistics', label: 'Statistics' },
 ];
 
 // CAMP SECTION
