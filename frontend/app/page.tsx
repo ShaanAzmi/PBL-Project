@@ -1,5 +1,6 @@
 import About from "@/components/About";
-import GraphsandCharts from "@/components/GraphsandCharts";
+import DiseaseStatistics from "@/components/DiseaseStatistics";
+import AllIndiaDiseaseData from "@/components/AllIndiaDiseaseData";
 import Intro from "@/components/Intro";
 import Testimonials from "@/components/Testimonials";
 
@@ -8,7 +9,8 @@ export default function Home() {
     <div className="space-y-20">
       <Intro/>
       <About/>
-      <GraphsandCharts/>
+      <DiseaseStatistics/>
+      <AllIndiaDiseaseData/>
       <Testimonials/>
     </div>
   )

@@ -2,7 +2,7 @@
 
 import React from 'react'
 import Button from './Button'
-import WaterDiseases from './WaterDiseases'
+import IndiaDiseasesAnimation from './IndiaDiseasesAnimation'
 import Link from 'next/link'
 import { motion } from 'framer-motion'
 import { useLanguage } from '@/contexts/LanguageContext'
@@ -73,9 +73,9 @@ const Intro = () => {
           </motion.div>
         </div>
 
-        {/* RIGHT SIDE — WATER DISEASES ANIMATION */}
+        {/* RIGHT SIDE — INDIA DISEASES ANIMATION */}
         <div className="relative z-10 flex flex-1 justify-center items-center xl:w-1/2">
-          <WaterDiseases />
+          <IndiaDiseasesAnimation />
         </div>
 
       </div>

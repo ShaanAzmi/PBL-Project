@@ -87,9 +87,9 @@ const getTranslations = () => ({
     'nav.backToHome': '← Back to Home',
 
     // Home Page
-    'home.title': 'Waterborne Disease Awareness',
-    'home.subtitle': 'Northeast India',
-    'home.description': 'Empowering communities with knowledge and tools to prevent waterborne diseases. Get instant symptom analysis, learn about prevention, and access healthcare resources.',
+    'home.title': 'Disease Monitoring & Prevention',
+    'home.subtitle': 'All India Coverage',
+    'home.description': 'Empowering communities across India with knowledge and tools to prevent major disease outbreaks. Get instant symptom analysis, learn about prevention, and access healthcare resources nationwide.',
     'home.getStarted': 'Get Started',
     'home.learnMore': 'Learn More',
     'home.symptomAnalysis': 'Symptom Analysis',
