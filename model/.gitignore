@@ -1,0 +1,74 @@
+# Python
+__pycache__/
+*.py[cod]
+*$py.class
+*.so
+.Python
+*.pyc
+*.pyo
+*.pyd
+
+# Virtual Environments
+.venv/
+.env/
+.conda/
+.conda_gpu/
+venv/
+ENV/
+env/
+
+# Jupyter Notebook
+.ipynb_checkpoints/
+*.ipynb_checkpoints
+
+# Model files (large files - don't commit)
+*.pt
+*.pth
+*.ckpt
+*.h5
+*.pkl
+*.pickle
+*.joblib
+
+# Data files (large - don't commit)
+data/raw/
+data/processed/*.csv
+*.csv
+*.xlsx
+*.json
+*.parquet
+
+# Logs and results
+logs/
+results/
+*.log
+
+# IDE
+.vscode/
+.idea/
+*.swp
+*.swo
+*~
+
+# OS
+.DS_Store
+Thumbs.db
+*.tmp
+
+# Keep model directory structure but ignore weights
+models/checkpoints/*
+models/saved_models/*
+!models/.gitkeep
+!models/checkpoints/.gitkeep
+!models/saved_models/.gitkeep
+
+# Keep data directory structure
+!data/.gitkeep
+!data/raw/.gitkeep
+!data/processed/.gitkeep
+
+# Documentation to keep
+!README.md
+!requirements.txt
+!DEPLOYMENT_SUMMARY.md
+!QUICK_REF.md
