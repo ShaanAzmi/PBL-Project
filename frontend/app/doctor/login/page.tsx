@@ -10,7 +10,7 @@ const DoctorLoginPage = () => {
 
   const handleLogin = (e: React.FormEvent) => {
     e.preventDefault()
-    // Mock login: just redirect to the dashboard
+    // Accept any email and password - no validation required
     router.push('/doctor/dashboard')
   }
 
@@ -34,11 +34,10 @@ const DoctorLoginPage = () => {
                 Email Address
               </label>
               <input
-                type="email"
+                type="text"
                 id="email"
                 name="email"
                 placeholder="doctor@nirogya.in"
-                required
                 className="w-full px-4 py-3 bg-gray-10 rounded-lg border border-gray-20 focus:outline-none focus:ring-2 focus:ring-primary-500 transition"
               />
             </div>
@@ -55,7 +54,6 @@ const DoctorLoginPage = () => {
                 id="password"
                 name="password"
                 placeholder="••••••••"
-                required
                 className="w-full px-4 py-3 bg-gray-10 rounded-lg border border-gray-20 focus:outline-none focus:ring-2 focus:ring-primary-500 transition"
               />
             </div>

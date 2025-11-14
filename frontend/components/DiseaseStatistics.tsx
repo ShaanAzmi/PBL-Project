@@ -1,12 +1,25 @@
 'use client'
 
-import React, { useRef } from 'react'
-import { motion } from 'framer-motion'
+import React, { useState, useEffect } from 'react'
+import { motion, AnimatePresence } from 'framer-motion'
 import { useLanguage } from '@/contexts/LanguageContext'
+import { Search, MapPin, TrendingUp, AlertCircle, Info, ChevronLeft, ChevronRight } from 'lucide-react'
 
 const DiseaseStatistics = () => {
   const { t } = useLanguage()
-  const scrollRef = useRef<HTMLDivElement>(null)
+  const [featuredIndex, setFeaturedIndex] = useState(0)
+  const [activeTab, setActiveTab] = useState<'search' | 'state'>('search')
+  const [searchQuery, setSearchQuery] = useState('')
+  const [selectedState, setSelectedState] = useState('')
+  const [selectedDisease, setSelectedDisease] = useState<any>(null)
+
+  // Auto-rotate featured disease every 5 seconds
+  useEffect(() => {
+    const interval = setInterval(() => {
+      setFeaturedIndex((prev) => (prev + 1) % diseaseData.length)
+    }, 5000)
+    return () => clearInterval(interval)
+  }, [])
 
   // Disease data across different Indian states with sources
   const diseaseData = [
@@ -19,7 +32,10 @@ const DiseaseStatistics = () => {
       source: "National Vector Borne Disease Control Programme",
       sourceUrl: "https://ncvbdc.mohfw.gov.in/",
       color: "from-red-50 to-red-100",
-      borderColor: "border-red-300"
+      borderColor: "border-red-300",
+      description: "Dengue is a mosquito-borne viral infection causing flu-like illness. Maharashtra sees peak transmission during monsoon season (June-September) due to increased mosquito breeding in urban areas.",
+      symptoms: ["High fever", "Severe headache", "Pain behind eyes", "Joint and muscle pain", "Rash"],
+      prevention: ["Eliminate standing water", "Use mosquito repellents", "Wear protective clothing", "Install window screens"]
     },
     {
       disease: "Malaria",
@@ -30,7 +46,10 @@ const DiseaseStatistics = () => {
       source: "NVBDCP Annual Report",
       sourceUrl: "https://ncvbdc.mohfw.gov.in/",
       color: "from-yellow-50 to-yellow-100",
-      borderColor: "border-yellow-300"
+      borderColor: "border-yellow-300",
+      description: "Malaria is a life-threatening disease caused by parasites transmitted through infected mosquitoes. Odisha accounts for a significant portion of India's malaria burden, particularly in tribal and forested regions.",
+      symptoms: ["Fever and chills", "Headache", "Nausea and vomiting", "Muscle pain", "Fatigue"],
+      prevention: ["Use insecticide-treated bed nets", "Indoor residual spraying", "Antimalarial medication", "Eliminate mosquito breeding sites"]
     },
     {
       disease: "Typhoid",
@@ -41,7 +60,10 @@ const DiseaseStatistics = () => {
       source: "Delhi Health Department",
       sourceUrl: "https://health.delhi.gov.in/",
       color: "from-blue-50 to-blue-100",
-      borderColor: "border-blue-300"
+      borderColor: "border-blue-300",
+      description: "Typhoid fever is a bacterial infection caused by Salmonella typhi, spread through contaminated food and water. Delhi's dense urban population and water quality issues contribute to regular outbreaks.",
+      symptoms: ["Prolonged fever", "Weakness", "Stomach pain", "Headache", "Loss of appetite"],
+      prevention: ["Drink safe water", "Practice good hygiene", "Get vaccinated", "Eat properly cooked food"]
     },
     {
       disease: "Cholera",
@@ -122,15 +144,19 @@ const DiseaseStatistics = () => {
     }
   ]
 
-  const scroll = (direction: 'left' | 'right') => {
-    if (scrollRef.current) {
-      const scrollAmount = 400
-      scrollRef.current.scrollBy({
-        left: direction === 'left' ? -scrollAmount : scrollAmount,
-        behavior: 'smooth'
-      })
+  // Filter diseases based on search or state
+  const filteredDiseases = diseaseData.filter(disease => {
+    if (activeTab === 'search' && searchQuery) {
+      return disease.disease.toLowerCase().includes(searchQuery.toLowerCase()) ||
+             disease.state.toLowerCase().includes(searchQuery.toLowerCase())
     }
-  }
+    if (activeTab === 'state' && selectedState) {
+      return disease.state === selectedState
+    }
+    return true
+  })
+
+  const states = [...new Set(diseaseData.map(d => d.state))].sort()
 
   return (
     <section id="statistics" className="relative bg-gradient-to-br from-cyan-50 via-teal-50 to-blue-50 py-20 overflow-hidden">
@@ -142,6 +168,7 @@ const DiseaseStatistics = () => {
       </div>
 
       <div className="max-container padding-container relative z-10">
+        {/* Header */}
         <div className="mb-12 text-center">
           <motion.h2
             className="bold-40 lg:bold-52 text-gray-90 mb-6"
@@ -150,7 +177,7 @@ const DiseaseStatistics = () => {
             transition={{ duration: 0.8 }}
             viewport={{ once: true }}
           >
-            Major Diseases Across India
+            Disease Surveillance Across India
           </motion.h2>
           <motion.p
             className="regular-16 text-gray-50 max-w-3xl mx-auto mb-4"
@@ -159,102 +186,432 @@ const DiseaseStatistics = () => {
             transition={{ duration: 0.6, delay: 0.2 }}
             viewport={{ once: true }}
           >
-            Real-time disease surveillance data from across Indian states. Data sourced from official government health departments and national disease control programmes.
-          </motion.p>
-          <motion.p
-            className="text-sm text-gray-40 italic"
-            initial={{ opacity: 0 }}
-            whileInView={{ opacity: 1 }}
-            transition={{ duration: 0.6, delay: 0.4 }}
-            viewport={{ once: true }}
-          >
-            Click on source links to verify data authenticity
+            Real-time disease surveillance data from across Indian states. Explore featured diseases or search for specific information.
           </motion.p>
         </div>
 
-        {/* Horizontal Scrolling Container */}
-        <div className="relative">
-          {/* Left Scroll Button */}
-          <button
-            onClick={() => scroll('left')}
-            className="absolute left-0 top-1/2 -translate-y-1/2 z-10 bg-white/90 hover:bg-white shadow-lg rounded-full p-3 transition-all hover:scale-110"
-            aria-label="Scroll left"
-          >
-            <svg className="w-6 h-6 text-gray-70" fill="none" stroke="currentColor" viewBox="0 0 24 24">
-              <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M15 19l-7-7 7-7" />
-            </svg>
-          </button>
-
-          {/* Right Scroll Button */}
-          <button
-            onClick={() => scroll('right')}
-            className="absolute right-0 top-1/2 -translate-y-1/2 z-10 bg-white/90 hover:bg-white shadow-lg rounded-full p-3 transition-all hover:scale-110"
-            aria-label="Scroll right"
-          >
-            <svg className="w-6 h-6 text-gray-70" fill="none" stroke="currentColor" viewBox="0 0 24 24">
-              <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M9 5l7 7-7 7" />
-            </svg>
-          </button>
-
-          {/* Scrollable Disease Cards */}
-          <div
-            ref={scrollRef}
-            className="flex gap-6 overflow-x-auto scrollbar-hide px-12 py-4 snap-x snap-mandatory"
-            style={{ scrollbarWidth: 'none', msOverflowStyle: 'none' }}
-          >
-            {diseaseData.map((item, index) => (
-              <motion.div
-                key={index}
-                className={`flex-shrink-0 w-[380px] bg-gradient-to-br ${item.color} rounded-2xl p-6 border-2 ${item.borderColor} shadow-lg hover:shadow-xl transition-all snap-center`}
-                initial={{ opacity: 0, x: 50 }}
-                whileInView={{ opacity: 1, x: 0 }}
-                transition={{ duration: 0.5, delay: index * 0.1 }}
-                viewport={{ once: true }}
-                whileHover={{ scale: 1.02, y: -5 }}
+        {/* Featured Disease - Auto Rotating */}
+        <motion.div
+          className="mb-16"
+          initial={{ opacity: 0, y: 20 }}
+          whileInView={{ opacity: 1, y: 0 }}
+          transition={{ duration: 0.6 }}
+          viewport={{ once: true }}
+        >
+          <div className="flex items-center justify-between mb-6">
+            <h3 className="bold-28 text-gray-90 flex items-center gap-2">
+              <TrendingUp className="w-7 h-7 text-primary-600" />
+              Featured Disease Outbreak
+            </h3>
+            <div className="flex items-center gap-2">
+              <button
+                onClick={() => setFeaturedIndex((prev) => (prev - 1 + diseaseData.length) % diseaseData.length)}
+                className="p-2 bg-white rounded-full shadow-md hover:shadow-lg transition-all"
               >
-                {/* Disease Name & State */}
-                <div className="mb-4">
-                  <h3 className="bold-24 text-gray-90 mb-2">{item.disease}</h3>
-                  <div className="flex items-center gap-2 text-primary-700">
-                    <svg className="w-4 h-4" fill="currentColor" viewBox="0 0 20 20">
-                      <path fillRule="evenodd" d="M5.05 4.05a7 7 0 119.9 9.9L10 18.9l-4.95-4.95a7 7 0 010-9.9zM10 11a2 2 0 100-4 2 2 0 000 4z" clipRule="evenodd" />
-                    </svg>
-                    <span className="font-semibold text-sm">{item.state}</span>
+                <ChevronLeft className="w-5 h-5 text-gray-700" />
+              </button>
+              <span className="text-sm text-gray-600 px-3">
+                {featuredIndex + 1} / {diseaseData.length}
+              </span>
+              <button
+                onClick={() => setFeaturedIndex((prev) => (prev + 1) % diseaseData.length)}
+                className="p-2 bg-white rounded-full shadow-md hover:shadow-lg transition-all"
+              >
+                <ChevronRight className="w-5 h-5 text-gray-700" />
+              </button>
+            </div>
+          </div>
+
+          <AnimatePresence mode="wait">
+            <motion.div
+              key={featuredIndex}
+              initial={{ opacity: 0, x: 100 }}
+              animate={{ opacity: 1, x: 0 }}
+              exit={{ opacity: 0, x: -100 }}
+              transition={{ duration: 0.5 }}
+              className={`bg-gradient-to-br ${diseaseData[featuredIndex].color} rounded-3xl p-8 border-2 ${diseaseData[featuredIndex].borderColor} shadow-2xl`}
+            >
+              <div className="grid grid-cols-1 lg:grid-cols-2 gap-8">
+                {/* Left Side - Main Info */}
+                <div>
+                  <div className="flex items-start justify-between mb-4">
+                    <div>
+                      <h4 className="bold-32 text-gray-90 mb-2">{diseaseData[featuredIndex].disease}</h4>
+                      <div className="flex items-center gap-2 text-gray-700">
+                        <MapPin className="w-5 h-5" />
+                        <span className="font-semibold text-lg">{diseaseData[featuredIndex].state}</span>
+                      </div>
+                    </div>
+                    <div className="bg-white/80 rounded-xl p-4 text-center">
+                      <p className="text-xs text-gray-600 mb-1">Reported Cases</p>
+                      <p className="bold-24 text-red-600">{diseaseData[featuredIndex].cases}</p>
+                      <p className="text-xs text-gray-500">{diseaseData[featuredIndex].year}</p>
+                    </div>
+                  </div>
+
+                  <div className="bg-white/70 rounded-xl p-5 mb-4">
+                    <div className="flex items-start gap-2 mb-3">
+                      <AlertCircle className="w-5 h-5 text-orange-600 flex-shrink-0 mt-0.5" />
+                      <div>
+                        <h5 className="font-semibold text-gray-90 mb-1">Impact</h5>
+                        <p className="text-sm text-gray-700">{diseaseData[featuredIndex].impact}</p>
+                      </div>
+                    </div>
+                  </div>
+
+                  {diseaseData[featuredIndex].description && (
+                    <div className="bg-white/70 rounded-xl p-5">
+                      <div className="flex items-start gap-2">
+                        <Info className="w-5 h-5 text-blue-600 flex-shrink-0 mt-0.5" />
+                        <div>
+                          <h5 className="font-semibold text-gray-90 mb-1">About</h5>
+                          <p className="text-sm text-gray-700 leading-relaxed">{diseaseData[featuredIndex].description}</p>
+                        </div>
+                      </div>
+                    </div>
+                  )}
+                </div>
+
+                {/* Right Side - Symptoms & Prevention */}
+                <div className="space-y-4">
+                  {diseaseData[featuredIndex].symptoms && (
+                    <div className="bg-white/80 rounded-xl p-5">
+                      <h5 className="font-semibold text-gray-90 mb-3 flex items-center gap-2">
+                        <svg className="w-5 h-5 text-red-600" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                          <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M12 9v2m0 4h.01m-6.938 4h13.856c1.54 0 2.502-1.667 1.732-3L13.732 4c-.77-1.333-2.694-1.333-3.464 0L3.34 16c-.77 1.333.192 3 1.732 3z" />
+                        </svg>
+                        Common Symptoms
+                      </h5>
+                      <ul className="space-y-2">
+                        {diseaseData[featuredIndex].symptoms.map((symptom: string, idx: number) => (
+                          <li key={idx} className="flex items-start gap-2 text-sm text-gray-700">
+                            <span className="text-red-500 mt-1">•</span>
+                            <span>{symptom}</span>
+                          </li>
+                        ))}
+                      </ul>
+                    </div>
+                  )}
+
+                  {diseaseData[featuredIndex].prevention && (
+                    <div className="bg-white/80 rounded-xl p-5">
+                      <h5 className="font-semibold text-gray-90 mb-3 flex items-center gap-2">
+                        <svg className="w-5 h-5 text-green-600" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                          <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M9 12l2 2 4-4m5.618-4.016A11.955 11.955 0 0112 2.944a11.955 11.955 0 01-8.618 3.04A12.02 12.02 0 003 9c0 5.591 3.824 10.29 9 11.622 5.176-1.332 9-6.03 9-11.622 0-1.042-.133-2.052-.382-3.016z" />
+                        </svg>
+                        Prevention Measures
+                      </h5>
+                      <ul className="space-y-2">
+                        {diseaseData[featuredIndex].prevention.map((measure: string, idx: number) => (
+                          <li key={idx} className="flex items-start gap-2 text-sm text-gray-700">
+                            <span className="text-green-500 mt-1">✓</span>
+                            <span>{measure}</span>
+                          </li>
+                        ))}
+                      </ul>
+                    </div>
+                  )}
+
+                  <div className="bg-white/70 rounded-xl p-4">
+                    <p className="text-xs text-gray-600 mb-2">Data Source:</p>
+                    <a
+                      href={diseaseData[featuredIndex].sourceUrl}
+                      target="_blank"
+                      rel="noopener noreferrer"
+                      className="text-sm text-primary-600 hover:text-primary-700 font-medium flex items-center gap-1 hover:underline"
+                    >
+                      {diseaseData[featuredIndex].source}
+                      <svg className="w-4 h-4" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                        <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M10 6H6a2 2 0 00-2 2v10a2 2 0 002 2h10a2 2 0 002-2v-4M14 4h6m0 0v6m0-6L10 14" />
+                      </svg>
+                    </a>
+                  </div>
+                </div>
+              </div>
+            </motion.div>
+          </AnimatePresence>
+        </motion.div>
+
+        {/* Interactive Tabs Section */}
+        <motion.div
+          className="mt-16"
+          initial={{ opacity: 0, y: 20 }}
+          whileInView={{ opacity: 1, y: 0 }}
+          transition={{ duration: 0.6 }}
+          viewport={{ once: true }}
+        >
+          <h3 className="bold-28 text-gray-90 mb-6 text-center">Explore Disease Information</h3>
+
+          {/* Tab Navigation */}
+          <div className="flex justify-center gap-4 mb-8">
+            <button
+              onClick={() => {
+                setActiveTab('search')
+                setSelectedState('')
+                setSelectedDisease(null)
+              }}
+              className={`px-8 py-4 rounded-xl font-semibold transition-all flex items-center gap-2 ${
+                activeTab === 'search'
+                  ? 'bg-gradient-to-r from-cyan-500 to-blue-600 text-white shadow-lg'
+                  : 'bg-white text-gray-700 hover:bg-gray-100 shadow-md'
+              }`}
+            >
+              <Search className="w-5 h-5" />
+              Search by Disease
+            </button>
+            <button
+              onClick={() => {
+                setActiveTab('state')
+                setSearchQuery('')
+                setSelectedDisease(null)
+              }}
+              className={`px-8 py-4 rounded-xl font-semibold transition-all flex items-center gap-2 ${
+                activeTab === 'state'
+                  ? 'bg-gradient-to-r from-cyan-500 to-blue-600 text-white shadow-lg'
+                  : 'bg-white text-gray-700 hover:bg-gray-100 shadow-md'
+              }`}
+            >
+              <MapPin className="w-5 h-5" />
+              Filter by State
+            </button>
+          </div>
+
+          {/* Tab Content */}
+          <div className="bg-white rounded-2xl shadow-xl p-8">
+            {activeTab === 'search' && (
+              <div>
+                <div className="mb-6">
+                  <label className="block font-semibold text-gray-90 mb-3">Search for a Disease</label>
+                  <div className="relative">
+                    <Search className="absolute left-4 top-1/2 -translate-y-1/2 w-5 h-5 text-gray-400" />
+                    <input
+                      type="text"
+                      value={searchQuery}
+                      onChange={(e) => setSearchQuery(e.target.value)}
+                      placeholder="Type disease name (e.g., Dengue, Malaria, Typhoid...)"
+                      className="w-full pl-12 pr-4 py-4 bg-white rounded-xl border-2 border-cyan-200 focus:outline-none focus:ring-2 focus:ring-cyan-500 focus:border-transparent font-medium text-gray-900"
+                    />
                   </div>
                 </div>
 
-                {/* Cases */}
-                <div className="mb-4 bg-white/60 rounded-lg p-3">
-                  <p className="text-xs text-gray-50 mb-1">Reported Cases ({item.year})</p>
-                  <p className="bold-20 text-gray-90">{item.cases}</p>
-                </div>
+                {searchQuery && filteredDiseases.length > 0 && (
+                  <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6">
+                    {filteredDiseases.map((disease, idx) => (
+                      <motion.div
+                        key={idx}
+                        initial={{ opacity: 0, scale: 0.9 }}
+                        animate={{ opacity: 1, scale: 1 }}
+                        transition={{ duration: 0.3, delay: idx * 0.1 }}
+                        className={`bg-gradient-to-br ${disease.color} rounded-xl p-6 border-2 ${disease.borderColor} shadow-md hover:shadow-lg transition-all cursor-pointer`}
+                        onClick={() => setSelectedDisease(disease)}
+                      >
+                        <h4 className="bold-20 text-gray-90 mb-2">{disease.disease}</h4>
+                        <div className="flex items-center gap-2 text-gray-700 mb-3">
+                          <MapPin className="w-4 h-4" />
+                          <span className="text-sm font-semibold">{disease.state}</span>
+                        </div>
+                        <div className="bg-white/70 rounded-lg p-3 mb-3">
+                          <p className="text-xs text-gray-600">Reported Cases ({disease.year})</p>
+                          <p className="bold-18 text-red-600">{disease.cases}</p>
+                        </div>
+                        <p className="text-sm text-gray-700">{disease.impact}</p>
+                      </motion.div>
+                    ))}
+                  </div>
+                )}
 
-                {/* Impact */}
-                <div className="mb-4">
-                  <p className="text-sm text-gray-70 leading-relaxed">
-                    <span className="font-semibold">Impact:</span> {item.impact}
-                  </p>
-                </div>
+                {searchQuery && filteredDiseases.length === 0 && (
+                  <div className="text-center py-12">
+                    <AlertCircle className="w-16 h-16 text-gray-400 mx-auto mb-4" />
+                    <p className="text-gray-600">No diseases found matching "{searchQuery}"</p>
+                  </div>
+                )}
 
-                {/* Source Link */}
-                <div className="pt-3 border-t border-gray-30">
-                  <p className="text-xs text-gray-50 mb-2">Data Source:</p>
-                  <a
-                    href={item.sourceUrl}
-                    target="_blank"
-                    rel="noopener noreferrer"
-                    className="text-xs text-primary-600 hover:text-primary-700 font-medium flex items-center gap-1 hover:underline"
+                {!searchQuery && (
+                  <div className="text-center py-12">
+                    <Search className="w-16 h-16 text-gray-300 mx-auto mb-4" />
+                    <p className="text-gray-500">Start typing to search for diseases</p>
+                  </div>
+                )}
+              </div>
+            )}
+
+            {activeTab === 'state' && (
+              <div>
+                <div className="mb-6">
+                  <label className="block font-semibold text-gray-90 mb-3">Select a State</label>
+                  <select
+                    value={selectedState}
+                    onChange={(e) => setSelectedState(e.target.value)}
+                    className="w-full px-4 py-4 bg-white rounded-xl border-2 border-cyan-200 focus:outline-none focus:ring-2 focus:ring-cyan-500 focus:border-transparent font-medium text-gray-900"
                   >
-                    {item.source}
-                    <svg className="w-3 h-3" fill="none" stroke="currentColor" viewBox="0 0 24 24">
-                      <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M10 6H6a2 2 0 00-2 2v10a2 2 0 002 2h10a2 2 0 002-2v-4M14 4h6m0 0v6m0-6L10 14" />
-                    </svg>
-                  </a>
+                    <option value="">Choose a state...</option>
+                    {states.map((state, idx) => (
+                      <option key={idx} value={state}>{state}</option>
+                    ))}
+                  </select>
                 </div>
-              </motion.div>
-            ))}
+
+                {selectedState && filteredDiseases.length > 0 && (
+                  <div>
+                    <h4 className="bold-20 text-gray-90 mb-4">Disease Prevalence in {selectedState}</h4>
+                    <div className="grid grid-cols-1 md:grid-cols-2 gap-6">
+                      {filteredDiseases.map((disease, idx) => (
+                        <motion.div
+                          key={idx}
+                          initial={{ opacity: 0, y: 20 }}
+                          animate={{ opacity: 1, y: 0 }}
+                          transition={{ duration: 0.3, delay: idx * 0.1 }}
+                          className={`bg-gradient-to-br ${disease.color} rounded-xl p-6 border-2 ${disease.borderColor} shadow-md hover:shadow-lg transition-all cursor-pointer`}
+                          onClick={() => setSelectedDisease(disease)}
+                        >
+                          <h5 className="bold-20 text-gray-90 mb-3">{disease.disease}</h5>
+                          <div className="bg-white/80 rounded-lg p-4 mb-4">
+                            <p className="text-xs text-gray-600 mb-1">Reported Cases ({disease.year})</p>
+                            <p className="bold-24 text-red-600">{disease.cases}</p>
+                          </div>
+                          <div className="mb-4">
+                            <p className="text-sm font-semibold text-gray-90 mb-1">Impact:</p>
+                            <p className="text-sm text-gray-700">{disease.impact}</p>
+                          </div>
+                          {disease.description && (
+                            <div className="bg-white/70 rounded-lg p-3">
+                              <p className="text-xs text-gray-700 line-clamp-3">{disease.description}</p>
+                            </div>
+                          )}
+                        </motion.div>
+                      ))}
+                    </div>
+                  </div>
+                )}
+
+                {!selectedState && (
+                  <div className="text-center py-12">
+                    <MapPin className="w-16 h-16 text-gray-300 mx-auto mb-4" />
+                    <p className="text-gray-500">Select a state to view disease prevalence data</p>
+                  </div>
+                )}
+              </div>
+            )}
           </div>
-        </div>
+        </motion.div>
+
+        {/* Selected Disease Detail Modal */}
+        {selectedDisease && (
+          <motion.div
+            className="fixed inset-0 bg-black/50 backdrop-blur-sm z-50 flex items-center justify-center p-4"
+            initial={{ opacity: 0 }}
+            animate={{ opacity: 1 }}
+            onClick={() => setSelectedDisease(null)}
+          >
+            <motion.div
+              className={`bg-gradient-to-br ${selectedDisease.color} rounded-3xl p-8 max-w-4xl w-full max-h-[90vh] overflow-y-auto border-2 ${selectedDisease.borderColor} shadow-2xl`}
+              initial={{ scale: 0.9, y: 20 }}
+              animate={{ scale: 1, y: 0 }}
+              onClick={(e) => e.stopPropagation()}
+            >
+              <div className="flex justify-between items-start mb-6">
+                <div>
+                  <h3 className="bold-32 text-gray-90 mb-2">{selectedDisease.disease}</h3>
+                  <div className="flex items-center gap-2 text-gray-700">
+                    <MapPin className="w-5 h-5" />
+                    <span className="font-semibold text-lg">{selectedDisease.state}</span>
+                  </div>
+                </div>
+                <button
+                  onClick={() => setSelectedDisease(null)}
+                  className="p-2 bg-white/80 hover:bg-white rounded-full transition-all"
+                >
+                  <svg className="w-6 h-6 text-gray-700" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                    <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M6 18L18 6M6 6l12 12" />
+                  </svg>
+                </button>
+              </div>
+
+              <div className="grid grid-cols-1 lg:grid-cols-2 gap-6">
+                <div className="space-y-4">
+                  <div className="bg-white/80 rounded-xl p-5">
+                    <p className="text-xs text-gray-600 mb-1">Reported Cases ({selectedDisease.year})</p>
+                    <p className="bold-28 text-red-600">{selectedDisease.cases}</p>
+                  </div>
+
+                  <div className="bg-white/80 rounded-xl p-5">
+                    <h5 className="font-semibold text-gray-90 mb-2 flex items-center gap-2">
+                      <AlertCircle className="w-5 h-5 text-orange-600" />
+                      Impact
+                    </h5>
+                    <p className="text-sm text-gray-700">{selectedDisease.impact}</p>
+                  </div>
+
+                  {selectedDisease.description && (
+                    <div className="bg-white/80 rounded-xl p-5">
+                      <h5 className="font-semibold text-gray-90 mb-2 flex items-center gap-2">
+                        <Info className="w-5 h-5 text-blue-600" />
+                        About
+                      </h5>
+                      <p className="text-sm text-gray-700 leading-relaxed">{selectedDisease.description}</p>
+                    </div>
+                  )}
+                </div>
+
+                <div className="space-y-4">
+                  {selectedDisease.symptoms && (
+                    <div className="bg-white/80 rounded-xl p-5">
+                      <h5 className="font-semibold text-gray-90 mb-3 flex items-center gap-2">
+                        <svg className="w-5 h-5 text-red-600" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                          <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M12 9v2m0 4h.01m-6.938 4h13.856c1.54 0 2.502-1.667 1.732-3L13.732 4c-.77-1.333-2.694-1.333-3.464 0L3.34 16c-.77 1.333.192 3 1.732 3z" />
+                        </svg>
+                        Common Symptoms
+                      </h5>
+                      <ul className="space-y-2">
+                        {selectedDisease.symptoms.map((symptom: string, idx: number) => (
+                          <li key={idx} className="flex items-start gap-2 text-sm text-gray-700">
+                            <span className="text-red-500 mt-1">•</span>
+                            <span>{symptom}</span>
+                          </li>
+                        ))}
+                      </ul>
+                    </div>
+                  )}
+
+                  {selectedDisease.prevention && (
+                    <div className="bg-white/80 rounded-xl p-5">
+                      <h5 className="font-semibold text-gray-90 mb-3 flex items-center gap-2">
+                        <svg className="w-5 h-5 text-green-600" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                          <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M9 12l2 2 4-4m5.618-4.016A11.955 11.955 0 0112 2.944a11.955 11.955 0 01-8.618 3.04A12.02 12.02 0 003 9c0 5.591 3.824 10.29 9 11.622 5.176-1.332 9-6.03 9-11.622 0-1.042-.133-2.052-.382-3.016z" />
+                        </svg>
+                        Prevention Measures
+                      </h5>
+                      <ul className="space-y-2">
+                        {selectedDisease.prevention.map((measure: string, idx: number) => (
+                          <li key={idx} className="flex items-start gap-2 text-sm text-gray-700">
+                            <span className="text-green-500 mt-1">✓</span>
+                            <span>{measure}</span>
+                          </li>
+                        ))}
+                      </ul>
+                    </div>
+                  )}
+
+                  <div className="bg-white/80 rounded-xl p-4">
+                    <p className="text-xs text-gray-600 mb-2">Data Source:</p>
+                    <a
+                      href={selectedDisease.sourceUrl}
+                      target="_blank"
+                      rel="noopener noreferrer"
+                      className="text-sm text-primary-600 hover:text-primary-700 font-medium flex items-center gap-1 hover:underline"
+                    >
+                      {selectedDisease.source}
+                      <svg className="w-4 h-4" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                        <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M10 6H6a2 2 0 00-2 2v10a2 2 0 002 2h10a2 2 0 002-2v-4M14 4h6m0 0v6m0-6L10 14" />
+                      </svg>
+                    </a>
+                  </div>
+                </div>
+              </div>
+            </motion.div>
+          </motion.div>
+        )}
 
         {/* Info Note */}
         <motion.div
@@ -265,9 +622,7 @@ const DiseaseStatistics = () => {
           viewport={{ once: true }}
         >
           <div className="flex items-start gap-3">
-            <svg className="w-6 h-6 text-primary-600 flex-shrink-0 mt-0.5" fill="currentColor" viewBox="0 0 20 20">
-              <path fillRule="evenodd" d="M18 10a8 8 0 11-16 0 8 8 0 0116 0zm-7-4a1 1 0 11-2 0 1 1 0 012 0zM9 9a1 1 0 000 2v3a1 1 0 001 1h1a1 1 0 100-2v-3a1 1 0 00-1-1H9z" clipRule="evenodd" />
-            </svg>
+            <Info className="w-6 h-6 text-primary-600 flex-shrink-0 mt-0.5" />
             <div>
               <h4 className="font-semibold text-gray-90 mb-2">About This Data</h4>
               <p className="text-sm text-gray-70 leading-relaxed">
@@ -279,12 +634,6 @@ const DiseaseStatistics = () => {
           </div>
         </motion.div>
       </div>
-
-      <style jsx>{`
-        .scrollbar-hide::-webkit-scrollbar {
-          display: none;
-        }
-      `}</style>
     </section>
   )
 }

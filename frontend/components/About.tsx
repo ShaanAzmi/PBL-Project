@@ -3,7 +3,7 @@
 import React from 'react'
 import { motion } from 'framer-motion'
 import { useLanguage } from '@/contexts/LanguageContext'
-import { Shield, BarChart3, Building2 } from 'lucide-react'
+import { Shield, BarChart3, Hospital } from 'lucide-react'
 
 const About = () => {
   const { t } = useLanguage()
@@ -49,7 +49,7 @@ const About = () => {
               whileHover={{ scale: 1.05 }}
             >
               <div className="w-12 h-12 bg-success-100 rounded-full flex items-center justify-center">
-                <Shield className="w-6 h-6 text-green-700" />
+                <Shield className="w-6 h-6 text-success-700" />
               </div>
               <span className="regular-14 text-gray-90 font-medium text-center">{t('tabs.prevention')}</span>
             </motion.div>
@@ -62,7 +62,7 @@ const About = () => {
               whileHover={{ scale: 1.05 }}
             >
               <div className="w-12 h-12 bg-primary-300 rounded-full flex items-center justify-center">
-                <BarChart3 className="w-6 h-6 text-cyan-700" />
+                <BarChart3 className="w-6 h-6 text-primary-700" />
               </div>
               <span className="regular-14 text-gray-90 font-medium text-center">Real-time Monitoring</span>
             </motion.div>
@@ -75,7 +75,7 @@ const About = () => {
               whileHover={{ scale: 1.05 }}
             >
               <div className="w-12 h-12 bg-accent-100 rounded-full flex items-center justify-center">
-                <Building2 className="w-6 h-6 text-yellow-700" />
+                <Hospital className="w-6 h-6 text-accent-700" />
               </div>
               <span className="regular-14 text-gray-90 font-medium text-center">AI Health Assistant</span>
             </motion.div>
