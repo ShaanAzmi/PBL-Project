@@ -19,7 +19,7 @@ const About = () => {
             transition={{ duration: 0.8, delay: 0.2 }}
             viewport={{ once: true }}
           >
-            About Nirogya
+            {t('about.title')}
           </motion.h2>
           <motion.p
             className="regular-16 text-gray-50 mb-6 leading-relaxed text-center"
@@ -28,7 +28,7 @@ const About = () => {
             transition={{ duration: 0.6, delay: 0.4 }}
             viewport={{ once: true }}
           >
-            Nirogya is India's comprehensive disease monitoring and prevention platform, providing real-time surveillance data and AI-powered health assistance across all states and union territories.
+            {t('about.description1')}
           </motion.p>
           <motion.p
             className="regular-16 text-gray-50 mb-8 leading-relaxed text-center"
@@ -37,7 +37,7 @@ const About = () => {
             transition={{ duration: 0.6, delay: 0.6 }}
             viewport={{ once: true }}
           >
-            From vector-borne diseases like dengue and malaria to waterborne illnesses and emerging health threats, we track major disease outbreaks nationwide. Our platform empowers communities with knowledge, early warning systems, and access to healthcare resources.
+            {t('about.description2')}
           </motion.p>
           <div className="grid grid-cols-1 sm:grid-cols-3 gap-4 max-w-3xl mx-auto">
             <motion.div
@@ -64,7 +64,7 @@ const About = () => {
               <div className="w-12 h-12 bg-primary-300 rounded-full flex items-center justify-center">
                 <BarChart3 className="w-6 h-6 text-primary-700" />
               </div>
-              <span className="regular-14 text-gray-90 font-medium text-center">Real-time Monitoring</span>
+              <span className="regular-14 text-gray-90 font-medium text-center">{t('about.realTimeMonitoring')}</span>
             </motion.div>
             <motion.div
               className="flex flex-col items-center gap-3 bg-accent-50 p-6 rounded-xl border border-accent-200"
@@ -77,7 +77,7 @@ const About = () => {
               <div className="w-12 h-12 bg-accent-100 rounded-full flex items-center justify-center">
                 <Hospital className="w-6 h-6 text-accent-700" />
               </div>
-              <span className="regular-14 text-gray-90 font-medium text-center">AI Health Assistant</span>
+              <span className="regular-14 text-gray-90 font-medium text-center">{t('about.aiHealthAssistant')}</span>
             </motion.div>
           </div>
         </div>

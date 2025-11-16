@@ -170,24 +170,12 @@ const DiseaseStatistics = () => {
       <div className="max-container padding-container relative z-10">
         {/* Header */}
         <div className="mb-12 text-center">
-          <motion.h2
-            className="bold-40 lg:bold-52 text-gray-90 mb-6"
-            initial={{ opacity: 0, y: 30 }}
-            whileInView={{ opacity: 1, y: 0 }}
-            transition={{ duration: 0.8 }}
-            viewport={{ once: true }}
-          >
-            Disease Surveillance Across India
-          </motion.h2>
-          <motion.p
-            className="regular-16 text-gray-50 max-w-3xl mx-auto mb-4"
-            initial={{ opacity: 0, y: 20 }}
-            whileInView={{ opacity: 1, y: 0 }}
-            transition={{ duration: 0.6, delay: 0.2 }}
-            viewport={{ once: true }}
-          >
-            Real-time disease surveillance data from across Indian states. Explore featured diseases or search for specific information.
-          </motion.p>
+                    <h2 className="bold-40 lg:bold-52 text-gray-90 mb-6">
+            {t('india.surveillance')}
+          </h2>
+          <p className="regular-16 text-gray-50 max-w-3xl mx-auto">
+            {t('india.surveillanceDesc')}
+          </p>
         </div>
 
         {/* Featured Disease - Auto Rotating */}
@@ -198,31 +186,10 @@ const DiseaseStatistics = () => {
           transition={{ duration: 0.6 }}
           viewport={{ once: true }}
         >
-          <div className="flex items-center justify-between mb-6">
-            <h3 className="bold-28 text-gray-90 flex items-center gap-2">
-              <TrendingUp className="w-7 h-7 text-primary-600" />
-              Featured Disease Outbreak
-            </h3>
-            <div className="flex items-center gap-2">
-              <button
-                onClick={() => setFeaturedIndex((prev) => (prev - 1 + diseaseData.length) % diseaseData.length)}
-                className="p-2 bg-white rounded-full shadow-md hover:shadow-lg transition-all"
-              >
-                <ChevronLeft className="w-5 h-5 text-gray-700" />
-              </button>
-              <span className="text-sm text-gray-600 px-3">
-                {featuredIndex + 1} / {diseaseData.length}
-              </span>
-              <button
-                onClick={() => setFeaturedIndex((prev) => (prev + 1) % diseaseData.length)}
-                className="p-2 bg-white rounded-full shadow-md hover:shadow-lg transition-all"
-              >
-                <ChevronRight className="w-5 h-5 text-gray-700" />
-              </button>
-            </div>
-          </div>
-
-          <AnimatePresence mode="wait">
+        <div className="flex items-center gap-2 mb-8">
+          <TrendingUp className="w-5 h-5 text-primary-600" />
+          <h3 className="bold-20 text-gray-90">{t('india.featuredOutbreak')}</h3>
+        </div>          <AnimatePresence mode="wait">
             <motion.div
               key={featuredIndex}
               initial={{ opacity: 0, x: 100 }}
@@ -340,7 +307,7 @@ const DiseaseStatistics = () => {
           transition={{ duration: 0.6 }}
           viewport={{ once: true }}
         >
-          <h3 className="bold-28 text-gray-90 mb-6 text-center">Explore Disease Information</h3>
+        <h3 className="bold-24 text-gray-90 mb-6 text-center">{t('india.exploreInfo')}</h3>
 
           {/* Tab Navigation */}
           <div className="flex justify-center gap-4 mb-8">
@@ -356,8 +323,8 @@ const DiseaseStatistics = () => {
                   : 'bg-white text-gray-700 hover:bg-gray-100 shadow-md'
               }`}
             >
-              <Search className="w-5 h-5" />
-              Search by Disease
+              <Search className="w-4 h-4" />
+              {t('india.searchByDisease')}
             </button>
             <button
               onClick={() => {
@@ -371,8 +338,8 @@ const DiseaseStatistics = () => {
                   : 'bg-white text-gray-700 hover:bg-gray-100 shadow-md'
               }`}
             >
-              <MapPin className="w-5 h-5" />
-              Filter by State
+              <MapPin className="w-4 h-4" />
+              {t('india.filterByState')}
             </button>
           </div>
 
@@ -381,14 +348,14 @@ const DiseaseStatistics = () => {
             {activeTab === 'search' && (
               <div>
                 <div className="mb-6">
-                  <label className="block font-semibold text-gray-90 mb-3">Search for a Disease</label>
+                  <label className="block font-semibold text-gray-90 mb-3">{t('india.searchForDisease')}</label>
                   <div className="relative">
                     <Search className="absolute left-4 top-1/2 -translate-y-1/2 w-5 h-5 text-gray-400" />
                     <input
                       type="text"
                       value={searchQuery}
                       onChange={(e) => setSearchQuery(e.target.value)}
-                      placeholder="Type disease name (e.g., Dengue, Malaria, Typhoid...)"
+                      placeholder={t('india.searchPlaceholder')}
                       className="w-full pl-12 pr-4 py-4 bg-white rounded-xl border-2 border-cyan-200 focus:outline-none focus:ring-2 focus:ring-cyan-500 focus:border-transparent font-medium text-gray-900"
                     />
                   </div>
@@ -430,7 +397,7 @@ const DiseaseStatistics = () => {
                 {!searchQuery && (
                   <div className="text-center py-12">
                     <Search className="w-16 h-16 text-gray-300 mx-auto mb-4" />
-                    <p className="text-gray-500">Start typing to search for diseases</p>
+                    <p className="text-gray-500">{t('india.startTyping')}</p>
                   </div>
                 )}
               </div>
@@ -439,7 +406,7 @@ const DiseaseStatistics = () => {
             {activeTab === 'state' && (
               <div>
                 <div className="mb-6">
-                  <label className="block font-semibold text-gray-90 mb-3">Select a State</label>
+                  <label className="block font-semibold text-gray-90 mb-3">{t('india.filterByState')}</label>
                   <select
                     value={selectedState}
                     onChange={(e) => setSelectedState(e.target.value)}

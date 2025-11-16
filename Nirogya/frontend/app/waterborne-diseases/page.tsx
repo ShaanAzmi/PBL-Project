@@ -5,6 +5,7 @@ import Link from 'next/link'
 import { motion, AnimatePresence } from 'framer-motion'
 import { AlertTriangle, TrendingUp, TrendingDown, Minus, ExternalLink, Bug, Droplet, Wind, Activity, Shield, MapPin, Phone, Hospital, Pill, Home, ChevronLeft, ChevronRight, Search, Filter, X, Check } from 'lucide-react'
 import { useLanguage } from '@/contexts/LanguageContext'
+import LanguageToggle from '@/components/LanguageToggle'
 import { BarChart, Bar, XAxis, YAxis, CartesianGrid, Tooltip, Legend, ResponsiveContainer, PieChart, Pie, Cell, LineChart, Line, RadarChart, PolarGrid, PolarAngleAxis, PolarRadiusAxis, Radar } from 'recharts'
 
 const AllIndiaDiseases = () => {
@@ -308,6 +309,7 @@ const AllIndiaDiseases = () => {
             <Link href="/" className="flex items-center gap-2">
               <span className="bold-20 text-primary-600">Nirogya</span>
             </Link>
+            <LanguageToggle />
           </div>
         </div>
       </header>
@@ -331,14 +333,13 @@ const AllIndiaDiseases = () => {
               <AlertTriangle className="text-white" size={36} />
             </div>
             <h1 className="bold-52 lg:bold-64 text-gray-90 mb-6">
-              Major Diseases Across India
+              {t('diseases.majorTitle')}
             </h1>
             <p className="regular-18 text-primary-600 font-medium mb-4">
-              Comprehensive Disease Surveillance & Prevention Guide
+              {t('diseases.comprehensiveGuide')}
             </p>
             <p className="regular-16 text-gray-50 max-w-4xl mx-auto leading-relaxed">
-              Explore detailed information about major diseases affecting India, including vector-borne, waterborne, and respiratory diseases.
-              All data is sourced from official government health departments and national disease control programmes.
+              {t('diseases.exploreInfo')}
             </p>
           </motion.div>
 
@@ -349,12 +350,12 @@ const AllIndiaDiseases = () => {
             animate={{ opacity: 1, y: 0 }}
             transition={{ duration: 0.6, delay: 0.2 }}
           >
-            <p className="text-center text-gray-600 mb-4 font-medium">Disease Categories Covered:</p>
+            <p className="text-center text-gray-600 mb-4 font-medium">{t('diseases.categoriesCovered')}</p>
             <div className="flex flex-wrap justify-center gap-4">
               {[
-                { label: 'Vector-Borne Diseases', icon: Bug, desc: 'Mosquito & insect transmitted', color: 'from-red-500 to-orange-500', bgColor: 'bg-red-50' },
-                { label: 'Waterborne Diseases', icon: Droplet, desc: 'Water & food contamination', color: 'from-blue-500 to-cyan-500', bgColor: 'bg-blue-50' },
-                { label: 'Respiratory Diseases', icon: Wind, desc: 'Airborne transmission', color: 'from-purple-500 to-violet-500', bgColor: 'bg-purple-50' }
+                { label: t('diseases.vectorBorne'), icon: Bug, desc: t('diseases.vectorBorneDesc'), color: 'from-red-500 to-orange-500', bgColor: 'bg-red-50' },
+                { label: t('diseases.waterborne'), icon: Droplet, desc: t('diseases.waterborneDesc'), color: 'from-blue-500 to-cyan-500', bgColor: 'bg-blue-50' },
+                { label: t('diseases.respiratory'), icon: Wind, desc: t('diseases.respiratoryDesc'), color: 'from-purple-500 to-violet-500', bgColor: 'bg-purple-50' }
               ].map((category, index) => {
                 const IconComponent = category.icon
                 return (
@@ -389,19 +390,19 @@ const AllIndiaDiseases = () => {
           >
             <div className="bg-white/90 backdrop-blur-sm rounded-xl p-6 shadow-lg border border-primary-100 text-center">
               <div className="text-4xl font-bold text-primary-600 mb-2">11</div>
-              <div className="text-sm text-gray-50">Major Diseases Tracked</div>
+              <div className="text-sm text-gray-50">{t('diseases.majorTracked')}</div>
             </div>
             <div className="bg-white/90 backdrop-blur-sm rounded-xl p-6 shadow-lg border border-primary-100 text-center">
               <div className="text-4xl font-bold text-red-600 mb-2">27M+</div>
-              <div className="text-sm text-gray-50">Annual Cases (2023)</div>
+              <div className="text-sm text-gray-50">{t('diseases.annualCases')}</div>
             </div>
             <div className="bg-white/90 backdrop-blur-sm rounded-xl p-6 shadow-lg border border-primary-100 text-center">
               <div className="text-4xl font-bold text-orange-600 mb-2">900K+</div>
-              <div className="text-sm text-gray-50">Annual Deaths</div>
+              <div className="text-sm text-gray-50">{t('diseases.annualDeaths')}</div>
             </div>
             <div className="bg-white/90 backdrop-blur-sm rounded-xl p-6 shadow-lg border border-primary-100 text-center">
               <div className="text-4xl font-bold text-green-600 mb-2">28</div>
-              <div className="text-sm text-gray-50">States Covered</div>
+              <div className="text-sm text-gray-50">{t('diseases.statesCovered')}</div>
             </div>
           </motion.div>
 
@@ -413,8 +414,8 @@ const AllIndiaDiseases = () => {
             transition={{ duration: 0.6, delay: 0.4 }}
           >
             <div className="text-center mb-6">
-              <h3 className="bold-32 text-gray-90 mb-2">Featured Disease Spotlight</h3>
-              <p className="text-sm text-gray-600">Auto-rotating every 5 seconds • Click arrows to navigate manually</p>
+              <h3 className="bold-32 text-gray-90 mb-2">{t('diseases.featuredSpotlight')}</h3>
+              <p className="text-sm text-gray-600">{t('diseases.autoRotating')}</p>
             </div>
 
             <div className="relative">
@@ -473,11 +474,11 @@ const AllIndiaDiseases = () => {
                       {/* Key Stats */}
                       <div className="grid grid-cols-2 gap-4 mb-6">
                         <div className="bg-white rounded-lg p-4 border border-primary-200">
-                          <p className="text-xs text-gray-500 mb-1">Annual Cases</p>
+                          <p className="text-xs text-gray-500 mb-1">{t('diseases.cases')}</p>
                           <p className="bold-20 text-primary-600">{majorDiseases[featuredIndex].annualCases}</p>
                         </div>
                         <div className="bg-white rounded-lg p-4 border border-red-200">
-                          <p className="text-xs text-gray-500 mb-1">Annual Deaths</p>
+                          <p className="text-xs text-gray-500 mb-1">{t('diseases.deaths')}</p>
                           <p className="bold-20 text-red-600">{majorDiseases[featuredIndex].deaths}</p>
                         </div>
                       </div>
@@ -485,7 +486,7 @@ const AllIndiaDiseases = () => {
                       {/* Trend */}
                       <div className={`flex items-center gap-2 px-4 py-3 rounded-lg ${getTrendColor(majorDiseases[featuredIndex].trend)}`}>
                         {getTrendIcon(majorDiseases[featuredIndex].trend)}
-                        <span className="font-semibold capitalize">Trend: {majorDiseases[featuredIndex].trend}</span>
+                        <span className="font-semibold capitalize">{t('diseases.trend')}: {t(`diseases.${majorDiseases[featuredIndex].trend}`)}</span>
                       </div>
                     </div>
 
@@ -495,7 +496,7 @@ const AllIndiaDiseases = () => {
                       <div className="bg-orange-50 rounded-lg p-4 border border-orange-200">
                         <h5 className="bold-14 text-orange-900 mb-2 flex items-center gap-2">
                           <Activity className="w-4 h-4" />
-                          Transmission
+                          {t('diseases.transmission')}
                         </h5>
                         <p className="regular-14 text-orange-700">{majorDiseases[featuredIndex].transmission}</p>
                       </div>
@@ -504,7 +505,7 @@ const AllIndiaDiseases = () => {
                       <div className="bg-red-50 rounded-lg p-4 border border-red-200">
                         <h5 className="bold-14 text-red-900 mb-2 flex items-center gap-2">
                           <AlertTriangle className="w-4 h-4" />
-                          Mortality Rate
+                          {t('diseases.mortalityRate')}
                         </h5>
                         <p className="regular-14 text-red-700">{majorDiseases[featuredIndex].mortality}</p>
                       </div>
@@ -513,7 +514,7 @@ const AllIndiaDiseases = () => {
                       <div>
                         <h5 className="bold-14 text-gray-90 mb-3 flex items-center gap-2">
                           <MapPin className="w-4 h-4" />
-                          Most Affected States
+                          {t('diseases.mostAffectedStates')}
                         </h5>
                         <div className="flex flex-wrap gap-2">
                           {majorDiseases[featuredIndex].topStates.slice(0, 5).map((state: string, idx: number) => (
@@ -535,7 +536,7 @@ const AllIndiaDiseases = () => {
                         }}
                         className="w-full py-3 bg-gradient-to-r from-primary-500 to-teal-500 text-white rounded-lg font-semibold hover:from-primary-600 hover:to-teal-600 transition-all shadow-md hover:shadow-lg"
                       >
-                        View Complete Details
+                        {t('diseases.viewCompleteDetails')}
                       </button>
                     </div>
                   </div>
@@ -574,10 +575,10 @@ const AllIndiaDiseases = () => {
             viewport={{ once: true }}
           >
             <h2 className="bold-40 lg:bold-48 text-gray-90 mb-4">
-              Disease Surveillance Data
+              {t('diseases.surveillanceData')}
             </h2>
             <p className="regular-16 text-gray-50 max-w-3xl mx-auto">
-              Visual analysis of disease patterns, trends, and regional distribution across India
+              {t('diseases.visualAnalysis')}
             </p>
           </motion.div>
 
@@ -591,8 +592,8 @@ const AllIndiaDiseases = () => {
               transition={{ duration: 0.6 }}
               viewport={{ once: true }}
             >
-              <h3 className="bold-24 text-gray-90 mb-4">Disease Category Distribution</h3>
-              <p className="text-sm text-gray-50 mb-6">Total annual cases by disease category (2023)</p>
+              <h3 className="bold-24 text-gray-90 mb-4">{t('diseases.categoryDistribution')}</h3>
+              <p className="text-sm text-gray-50 mb-6">{t('diseases.totalAnnualCases')}</p>
               <ResponsiveContainer width="100%" height={300}>
                 <PieChart>
                   <Pie
@@ -640,8 +641,8 @@ const AllIndiaDiseases = () => {
               transition={{ duration: 0.6 }}
               viewport={{ once: true }}
             >
-              <h3 className="bold-24 text-gray-90 mb-4">Regional Disease Burden</h3>
-              <p className="text-sm text-gray-50 mb-6">Total cases by region (2023)</p>
+              <h3 className="bold-24 text-gray-90 mb-4">{t('diseases.regionalBurden')}</h3>
+              <p className="text-sm text-gray-50 mb-6">{t('diseases.totalCasesByRegion')}</p>
               <ResponsiveContainer width="100%" height={300}>
                 <BarChart data={regionalData}>
                   <CartesianGrid strokeDasharray="3 3" stroke="#E5E7EB" />
@@ -664,7 +665,7 @@ const AllIndiaDiseases = () => {
                 rel="noopener noreferrer"
                 className="text-xs text-primary-600 hover:underline inline-flex items-center gap-1 mt-4"
               >
-                Source: HMIS Health Data Portal
+                {t('diseases.source')}: {t('diseases.hmisPortal')}
                 <ExternalLink className="w-3 h-3" />
               </a>
             </motion.div>
@@ -678,8 +679,8 @@ const AllIndiaDiseases = () => {
             transition={{ duration: 0.6 }}
             viewport={{ once: true }}
           >
-            <h3 className="bold-24 text-gray-90 mb-4">5-Year Disease Trends</h3>
-            <p className="text-sm text-gray-50 mb-6">Annual case trends for major diseases (2019-2023)</p>
+            <h3 className="bold-24 text-gray-90 mb-4">{t('diseases.fiveYearTrends')}</h3>
+            <p className="text-sm text-gray-50 mb-6">{t('diseases.annualCaseTrends')}</p>
             <ResponsiveContainer width="100%" height={350}>
               <LineChart data={trendData}>
                 <CartesianGrid strokeDasharray="3 3" stroke="#E5E7EB" />
@@ -706,7 +707,7 @@ const AllIndiaDiseases = () => {
               rel="noopener noreferrer"
               className="text-xs text-primary-600 hover:underline inline-flex items-center gap-1 mt-4"
             >
-              Source: HMIS Health Data Portal & Disease Control Programmes
+              {t('diseases.source')}: {t('diseases.hmisAndPrograms')}
               <ExternalLink className="w-3 h-3" />
             </a>
           </motion.div>
@@ -719,8 +720,8 @@ const AllIndiaDiseases = () => {
             transition={{ duration: 0.6 }}
             viewport={{ once: true }}
           >
-            <h3 className="bold-24 text-gray-90 mb-4">Disease Severity Comparison</h3>
-            <p className="text-sm text-gray-50 mb-6">Comparative analysis of mortality, case load, spread rate, and treatment availability</p>
+            <h3 className="bold-24 text-gray-90 mb-4">{t('diseases.severityComparison')}</h3>
+            <p className="text-sm text-gray-50 mb-6">{t('diseases.comparativeAnalysis')}</p>
             <ResponsiveContainer width="100%" height={400}>
               <RadarChart data={severityComparison}>
                 <PolarGrid stroke="#E5E7EB" />
@@ -749,7 +750,7 @@ const AllIndiaDiseases = () => {
             viewport={{ once: true }}
           >
             <h2 className="bold-40 lg:bold-48 text-gray-90 mb-4">
-              Explore Disease Information
+              {t('diseases.exploreInfo2')}
             </h2>
             <p className="regular-16 text-gray-50 max-w-3xl mx-auto">
               Search by disease name or filter by state to find detailed information
@@ -771,7 +772,7 @@ const AllIndiaDiseases = () => {
             >
               <div className="flex items-center gap-2">
                 <Search className="w-5 h-5" />
-                Search by Disease
+                {t('diseases.searchByDisease')}
               </div>
             </button>
             <button
@@ -787,7 +788,7 @@ const AllIndiaDiseases = () => {
             >
               <div className="flex items-center gap-2">
                 <Filter className="w-5 h-5" />
-                Filter by State
+                {t('diseases.filterByState')}
               </div>
             </button>
           </div>
@@ -799,7 +800,7 @@ const AllIndiaDiseases = () => {
                 <Search className="absolute left-4 top-1/2 -translate-y-1/2 w-5 h-5 text-gray-400" />
                 <input
                   type="text"
-                  placeholder="Search for diseases (e.g., Dengue, Malaria, Tuberculosis)..."
+                  placeholder={t('diseases.searchPlaceholder')}
                   value={searchQuery}
                   onChange={(e) => setSearchQuery(e.target.value)}
                   className="w-full pl-12 pr-12 py-4 rounded-xl border-2 border-cyan-200 focus:border-cyan-500 focus:outline-none text-lg bg-white text-gray-900"
@@ -841,8 +842,8 @@ const AllIndiaDiseases = () => {
           {/* Results Count */}
           <div className="text-center mb-6">
             <p className="text-gray-600">
-              Showing <span className="font-bold text-primary-600">{filteredDiseases.length}</span> of{' '}
-              <span className="font-bold">{majorDiseases.length}</span> diseases
+              {t('diseases.showing')} <span className="font-bold text-primary-600">{filteredDiseases.length}</span> {t('diseases.of')}{' '}
+              <span className="font-bold">{majorDiseases.length}</span> {t('diseases.diseasesText')}
               {selectedState && <span className="text-primary-600"> in {selectedState}</span>}
               {searchQuery && <span className="text-primary-600"> matching "{searchQuery}"</span>}
             </p>
@@ -881,16 +882,16 @@ const AllIndiaDiseases = () => {
                     </div>
                     <div className="flex items-center gap-4 text-sm">
                       <div className="flex items-center gap-1">
-                        <span className="text-gray-50">Cases:</span>
+                        <span className="text-gray-50">{t('diseases.cases')}:</span>
                         <span className="font-bold text-primary-600">{disease.annualCases}</span>
                       </div>
                       <div className="flex items-center gap-1">
-                        <span className="text-gray-50">Deaths:</span>
+                        <span className="text-gray-50">{t('diseases.deaths')}:</span>
                         <span className="font-bold text-red-600">{disease.deaths}</span>
                       </div>
                       <div className={`flex items-center gap-1 px-2 py-1 rounded-lg ${getTrendColor(disease.trend)}`}>
                         {getTrendIcon(disease.trend)}
-                        <span className="text-xs font-semibold capitalize">{disease.trend}</span>
+                        <span className="text-xs font-semibold capitalize">{t(`diseases.${disease.trend}`)}</span>
                       </div>
                     </div>
                   </div>
@@ -906,14 +907,14 @@ const AllIndiaDiseases = () => {
                   <div className="bg-orange-50 rounded-lg p-4 border border-orange-200">
                     <h4 className="bold-14 text-orange-900 mb-2 flex items-center gap-2">
                       <Activity className="w-4 h-4" />
-                      Transmission
+                      {t('diseases.transmission')}
                     </h4>
                     <p className="regular-14 text-orange-700 line-clamp-2">{disease.transmission}</p>
                   </div>
                   <div className="bg-red-50 rounded-lg p-4 border border-red-200">
                     <h4 className="bold-14 text-red-900 mb-2 flex items-center gap-2">
                       <AlertTriangle className="w-4 h-4" />
-                      Mortality Rate
+                      {t('diseases.mortalityRate')}
                     </h4>
                     <p className="regular-14 text-red-700 line-clamp-2">{disease.mortality}</p>
                   </div>
@@ -923,7 +924,7 @@ const AllIndiaDiseases = () => {
                 <div className="mb-4">
                   <h4 className="bold-14 text-gray-90 mb-3 flex items-center gap-2">
                     <MapPin className="w-4 h-4" />
-                    Most Affected States
+                    {t('diseases.mostAffectedStates')}
                   </h4>
                   <div className="flex flex-wrap gap-2">
                     {disease.topStates.slice(0, 3).map((state, idx) => (
@@ -945,7 +946,7 @@ const AllIndiaDiseases = () => {
                 {/* Click to view more */}
                 <div className="pt-4 border-t border-gray-200 text-center">
                   <p className="text-sm text-primary-600 font-semibold">
-                    Click to view complete details →
+                    {t('diseases.clickToView')} →
                   </p>
                 </div>
               </motion.div>
@@ -1157,11 +1158,10 @@ const AllIndiaDiseases = () => {
             viewport={{ once: true }}
           >
             <h2 className="bold-40 lg:bold-52 text-white mb-6">
-              Need Help Identifying Symptoms?
+              {t('diseases.needHelpSymptoms')}
             </h2>
             <p className="regular-18 text-white/90 mb-10 max-w-3xl mx-auto leading-relaxed">
-              Use our AI-powered symptom analyzer to get instant insights about potential diseases and recommended actions.
-              Early detection can save lives.
+              {t('diseases.symptomAnalyzer')}
             </p>
             <div className="flex flex-col sm:flex-row gap-6 justify-center">
               <Link href="/get-started">
@@ -1171,7 +1171,7 @@ const AllIndiaDiseases = () => {
                   whileTap={{ scale: 0.95 }}
                 >
                   <Activity className="w-6 h-6" />
-                  Analyze Symptoms Now
+                  {t('diseases.analyzeSymptomsNow')}
                 </motion.button>
               </Link>
               <Link href="/">
@@ -1181,7 +1181,7 @@ const AllIndiaDiseases = () => {
                   whileTap={{ scale: 0.95 }}
                 >
                   <Home className="w-6 h-6" />
-                  Back to Home
+                  {t('diseases.backToHome')}
                 </motion.button>
               </Link>
             </div>

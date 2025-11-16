@@ -1,25 +1,30 @@
+'use client'
+
 import React from 'react'
 import Image from 'next/image'
+import { useLanguage } from '@/contexts/LanguageContext'
 
 const Testimonials = () => {
+  const { t } = useLanguage()
+  
   const testimonials = [
     {
-      name: "Dr. Saloni Saini",
-      role: "MBBS Graduate",
+      name: t('testimonials.drSaloni'),
+      role: t('testimonials.roleSaloni'),
       image: "/test1.jpeg",
-      quote: "This system accurately predicts disease outbreaks based on water quality. It's a game-changer for preventive healthcare."
+      quote: t('testimonials.quoteSaloni')
     },
     {
-      name: "Utkarsh Yasshwi",
-      role: "MBBS Student",
+      name: t('testimonials.utkarsh'),
+      role: t('testimonials.roleUtkarsh'),
       image: "/test2.jpeg",
-      quote: "The 3-month predictions are remarkably accurate. This tool will help healthcare workers prepare better for outbreaks."
+      quote: t('testimonials.quoteUtkarsh')
     },
     {
-      name: "Anshika Bajpai",
-      role: "MBBS Student",
+      name: t('testimonials.anshika'),
+      role: t('testimonials.roleAnshika'),
       image: "/anshika-bajpai.jpg",
-      quote: "The ML integration with water quality data is innovative. This platform transforms reactive healthcare into proactive prevention."
+      quote: t('testimonials.quoteAnshika')
     }
   ]
 
@@ -28,10 +33,10 @@ const Testimonials = () => {
       <div className="max-container padding-container">
         <div className="text-left mb-16">
           <h2 className="bold-40 lg:bold-52 text-gray-90 mb-6">
-            Testimonials
+            {t('testimonials.title')}
           </h2>
           <p className="regular-16 text-gray-50 max-w-2xl">
-            Validated by medical professionals and healthcare experts who have tested our disease prediction system with real-world data.
+            {t('testimonials.subtitle')}
           </p>
         </div>
 

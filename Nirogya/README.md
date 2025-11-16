@@ -68,32 +68,40 @@ To provide healthcare professionals, policymakers, and citizens with actionable 
 
 ### 📊 Disease Tracking & Analytics
 
-- **Comprehensive Database**: 11 major diseases with detailed information
-- **Real-time Statistics**: Live tracking of cases, deaths, and trends
-- **Interactive Visualizations**: Charts, graphs, and maps using Recharts
-- **State-wise Analysis**: Filter and analyze data by state/region
+- **Comprehensive Database**: 11 major diseases with detailed information (TB, Dengue, Malaria, Typhoid, Cholera, Hepatitis, Chikungunya, COVID-19, Japanese Encephalitis, Leptospirosis, Plague)
+- **Real-time Statistics**: Live tracking of cases, deaths, and trend indicators
+- **Interactive Visualizations**: Multiple chart types (Pie, Bar, Line, Radar) using Recharts
+- **State-wise Analysis**: Filter and analyze data across all Indian states and UTs
+- **Disease Category Distribution**: Visual breakdown by Vector-borne, Waterborne, and Respiratory diseases
+- **5-Year Trend Analysis**: Historical data visualization (2019-2023)
+- **Regional Disease Burden**: Comparative analysis across North, South, East, West, Central, and Northeast regions
 
 ### 🎨 User Interface
 
-- **Auto-Rotating Featured Disease**: Spotlight section with 5-second rotation
-- **Interactive Search & Filter**: Search by disease or filter by state
-- **Click-to-Expand Cards**: Detailed disease information in modals
-- **Professional Icons**: Lucide React icons throughout (no emojis)
-- **Responsive Design**: Mobile-first approach with Tailwind CSS
-- **Smooth Animations**: Framer Motion for elegant transitions
+- **Auto-Rotating Featured Disease Spotlight**: Carousel with 5-second auto-rotation and manual navigation
+- **Interactive Search & Filter**: Dual-mode search (by disease name or by state) with live filtering
+- **Click-to-Expand Disease Cards**: Detailed modal popups with symptoms, transmission, prevention, and affected states
+- **Professional Icon System**: Lucide React icons throughout with category-specific icons (Bug, Droplet, Wind)
+- **Responsive Design**: Mobile-first approach with adaptive layouts using Tailwind CSS
+- **Smooth Animations**: Framer Motion for page transitions, hover effects, and micro-interactions
+- **Gradient Backgrounds**: Modern glass-morphism effects and gradient overlays
+- **Accessibility Features**: Keyboard navigation, ARIA labels, and screen reader support
 
 ### 👨‍⚕️ Doctor Dashboard
 
-- **Disease Prediction Tool**: Step-by-step ML prediction interface
-- **Disease Records**: Comprehensive outbreak records with search/filter
-- **Tab-based Navigation**: Clean separation of prediction and records
-- **Export Capabilities**: Download data for further analysis
+- **Disease Prediction Tool**: Advanced ML prediction interface with 14-day historical input
+- **Disease Records**: Comprehensive outbreak records with search/filter capabilities
+- **Patient Records Management**: Track and manage patient information with status updates
+- **Tab-based Navigation**: Clean separation between prediction, disease records, and patient management
+- **Real-time Validation**: Form validation with instant feedback
+- **Export Capabilities**: Download data in CSV/Excel format for analysis
 
 ### 🌐 Multilingual Support
 
-- **4 Languages**: English, Hindi, Bengali, Assamese
-- **Context-aware Translation**: Seamless language switching
-- **Localized Content**: All UI elements translated
+- **6 Languages**: English, Hindi, Bengali, Assamese, Tamil, Telugu
+- **Context-aware Translation**: Seamless language switching across all pages
+- **Localized Content**: Complete UI translation including charts, buttons, and notifications
+- **Smart Language Toggle**: Dropdown with native script display and language indicators
 
 ### 🔒 Security & Performance
 
@@ -117,19 +125,48 @@ API Docs: http://localhost:8000/docs
 ### Screenshots
 
 **Homepage**
-- Hero section with disease statistics
-- Featured disease spotlight
-- Quick access to prediction tools
+- Animated hero section with gradient backgrounds
+- All-India disease surveillance statistics
+- Featured disease carousel with auto-rotation
+- About section with mission statement
+- Testimonials from medical professionals
+- Call-to-action for symptom analysis
+
+**Major Diseases Page (All India)**
+- Comprehensive disease information for all Indian states
+- Auto-rotating featured disease spotlight with navigation arrows
+- Interactive search and state-based filtering
+- 4 interactive data visualization charts:
+  - Disease Category Distribution (Pie Chart)
+  - Regional Disease Burden (Bar Chart)
+  - 5-Year Disease Trends (Line Chart)
+  - Disease Severity Comparison (Radar Chart)
+- Detailed disease cards with transmission, mortality, and affected states
+- Expandable modals with complete disease information
+- Fully multilingual across 6 languages
+
+**Get Started / Patient Registration**
+- Multi-step patient registration form
+- Voice input support for symptom description
+- Real-time form validation
+- Success confirmation with status tracking
+- Multilingual form labels and placeholders
 
 **Doctor Dashboard**
-- Disease prediction interface
-- Historical outbreak records
-- Interactive data visualization
-
-**Disease Information Page**
-- Auto-rotating featured diseases
-- Search and filter functionality
-- Detailed disease modals
+- **Disease Prediction Tab**: 
+  - Region and disease selection (985 regions, 129 diseases)
+  - 14-day historical case input interface
+  - ML model prediction with confidence intervals
+  - Visual prediction results display
+- **Disease Records Tab**:
+  - Comprehensive outbreak records table
+  - Search and filter capabilities
+  - Export functionality
+- **Patient Records Tab**:
+  - Patient information management
+  - Status tracking (Incoming, Under Treatment, Recovered)
+  - Search by name, phone, or symptoms
+  - Detailed patient view with contact information
 
 ---
 
@@ -148,6 +185,7 @@ API Docs: http://localhost:8000/docs
 | **Lucide React** | 0.542.0 | Icon library |
 | **Axios** | 1.6.0 | HTTP client |
 | **PapaParse** | 5.5.3 | CSV parsing |
+| **React Context API** | Built-in | State management for language switching |
 
 ### Backend
 
@@ -330,13 +368,54 @@ npm run dev
 - **API Documentation**: http://localhost:8000/docs
 - **Health Check**: http://localhost:8000/health
 
-### Using the Prediction Tool
+### Using the Application
 
-1. **Login as Doctor**: Navigate to `/doctor/dashboard` (any email/password works for demo)
-2. **Select Region**: Choose from 985 regions in State_District format
-3. **Select Disease**: Choose from 129 tracked diseases
-4. **Enter Historical Data**: Input 14 days of case numbers
-5. **Submit**: Get prediction with confidence intervals
+#### Patient Registration (Get Started)
+
+1. **Navigate to Get Started**: Click "শুরু করুন" (Get Started) in navigation
+2. **Fill Patient Information**:
+   - Full Name (required)
+   - Phone Number (required)
+   - Email Address (optional)
+   - Full Address (optional)
+   - Symptom Description (required) - with voice input support
+3. **Submit Registration**: Patient record is created with "Incoming" status
+4. **Confirmation**: Success message with patient status
+
+#### Doctor Dashboard - Disease Prediction
+
+1. **Login as Doctor**: Navigate to `/doctor/login` then `/doctor/dashboard`
+2. **Select Disease Prediction Tab**
+3. **Choose Region**: Select from 985 regions in State_District format
+4. **Choose Disease**: Select from 129 tracked diseases
+5. **Enter Historical Cases**: Input 14 consecutive days of case numbers
+6. **Submit Prediction**: Get ML-powered prediction with:
+   - Predicted cases for next day
+   - 95% confidence interval (lower and upper bounds)
+   - Region and disease information
+   - Model version details
+
+#### Doctor Dashboard - Patient Records
+
+1. **Select Patient Records Tab**
+2. **View All Patients**: See list with name, phone, symptoms, status
+3. **Search Patients**: Filter by name, phone, or symptoms
+4. **Check Patient Details**: View full information including address and submission date
+5. **Track Status**: Monitor patient progress (Incoming → Under Treatment → Recovered)
+
+#### Disease Information Exploration
+
+1. **Navigate to Major Diseases Page**
+2. **Browse Featured Spotlight**: Auto-rotating disease carousel
+3. **Search or Filter**:
+   - Search by disease name (Dengue, Malaria, etc.)
+   - Filter by state to see region-specific data
+4. **View Disease Details**: Click any disease card for complete information:
+   - Symptoms and transmission methods
+   - Mortality rates and prevention strategies
+   - Most affected states
+   - Data sources and references
+5. **Analyze Data Visualizations**: Interact with 4 chart types showing trends and patterns
 
 ---
 
@@ -431,10 +510,11 @@ POST /predict
 ```
 
 **Status Codes:**
-- `200`: Success
-- `400`: Bad Request (invalid input)
-- `404`: Not Found
-- `500`: Internal Server Error
+- `200`: Success - Request completed successfully
+- `400`: Bad Request - Invalid input parameters or missing required fields
+- `404`: Not Found - Resource or endpoint not found
+- `422`: Validation Error - Input data failed validation
+- `500`: Internal Server Error - Server-side error occurred
 
 ---
 
@@ -491,28 +571,35 @@ Output (Predicted Cases)
 Nirogya/
 ├── frontend/                      # Next.js frontend application
 │   ├── app/                       # Next.js 15 app directory
-│   │   ├── page.tsx              # Homepage
-│   │   ├── layout.tsx            # Root layout
-│   │   ├── globals.css           # Global styles
-│   │   ├── doctor/               # Doctor dashboard
-│   │   │   └── dashboard/
-│   │   │       └── page.tsx      # Dashboard page
-│   │   ├── get-started/          # Get started page
-│   │   │   └── page.tsx
-│   │   └── waterborne-diseases/  # Disease information page
-│   │       └── page.tsx
+│   │   ├── page.tsx              # Homepage with hero, stats, testimonials
+│   │   ├── layout.tsx            # Root layout with metadata
+│   │   ├── globals.css           # Global styles and Tailwind
+│   │   ├── doctor/               # Doctor features
+│   │   │   ├── dashboard/
+│   │   │   │   └── page.tsx      # Multi-tab dashboard (Prediction, Records, Patients)
+│   │   │   └── login/
+│   │   │       └── page.tsx      # Doctor authentication
+│   │   ├── get-started/          # Patient registration
+│   │   │   └── page.tsx          # Multi-step form with voice input
+│   │   └── waterborne-diseases/  # Disease information (All India)
+│   │       └── page.tsx          # Auto-rotating spotlight, search, charts
 │   ├── components/               # React components
-│   │   ├── Navbar.tsx           # Navigation bar
-│   │   ├── Footer.tsx           # Footer component
-│   │   ├── Intro.tsx            # Hero section
-│   │   ├── About.tsx            # About section
-│   │   ├── Prediction.tsx       # ML prediction interface
-│   │   ├── RecordBook.tsx       # Disease records table
-│   │   ├── DiseaseStatistics.tsx # Statistics component
-│   │   ├── LanguageToggle.tsx   # Language switcher
-│   │   └── ...                  # Other components
+│   │   ├── Navbar.tsx           # Navigation with language toggle
+│   │   ├── Footer.tsx           # Footer with links and copyright
+│   │   ├── Intro.tsx            # Hero section with animations
+│   │   ├── About.tsx            # Mission and features
+│   │   ├── Prediction.tsx       # ML prediction interface (14-day input)
+│   │   ├── RecordBook.tsx       # Disease outbreak records table
+│   │   ├── PatientRecords.tsx   # Patient management interface
+│   │   ├── DiseaseStatistics.tsx # All-India statistics component
+│   │   ├── AllIndiaDiseaseData.tsx # Comprehensive disease data display
+│   │   ├── IndiaDiseasesAnimation.tsx # Interactive India map
+│   │   ├── Testimonials.tsx     # Medical professional reviews
+│   │   ├── LanguageToggle.tsx   # 6-language dropdown switcher
+│   │   ├── Button.tsx           # Reusable button component
+│   │   └── DoctorProfile.tsx    # Doctor information display
 │   ├── contexts/                # React contexts
-│   │   └── LanguageContext.tsx  # Multilingual support
+│   │   └── LanguageContext.tsx  # Multilingual support (6 languages, 500+ translations)
 │   ├── constants/               # Constants and config
 │   │   └── index.ts            # App constants
 │   ├── public/                  # Static assets
@@ -581,7 +668,8 @@ const nextConfig = {
 ```env
 NEXT_PUBLIC_API_URL=http://localhost:8000
 NEXT_PUBLIC_APP_NAME=Nirogya
-NEXT_PUBLIC_VERSION=1.0.0
+NEXT_PUBLIC_VERSION=2.0.0
+NEXT_PUBLIC_DEFAULT_LANGUAGE=en
 ```
 
 ### Backend Configuration
@@ -804,12 +892,16 @@ We welcome contributions from the community! Here's how you can help:
 ### Areas for Contribution
 
 - 🐛 **Bug Fixes**: Report and fix bugs
-- ✨ **New Features**: Add new functionality
-- 📝 **Documentation**: Improve documentation
-- 🎨 **UI/UX**: Enhance user interface
-- 🧪 **Testing**: Add tests
-- 🌐 **Translations**: Add more languages
-- 🚀 **Performance**: Optimize code
+- ✨ **New Features**: Add new functionality (e.g., SMS alerts, WhatsApp integration)
+- 📝 **Documentation**: Improve documentation and guides
+- 🎨 **UI/UX**: Enhance user interface and accessibility
+- 🧪 **Testing**: Add unit tests, integration tests, E2E tests
+- 🌐 **Translations**: Add more regional languages (Marathi, Gujarati, Kannada, Malayalam, Punjabi, Odia)
+- 🚀 **Performance**: Optimize code, reduce bundle size, improve loading times
+- 📊 **Data Visualization**: Create new chart types and analytics dashboards
+- 🤖 **ML Models**: Improve prediction accuracy, add new disease models
+- 🔐 **Security**: Enhance authentication, add role-based access control
+- 📱 **Mobile**: Develop responsive mobile views and PWA features
 
 ### Code of Conduct
 
@@ -854,17 +946,24 @@ SOFTWARE.
 
 ### Data Sources
 
-- **IDSP (Integrated Disease Surveillance Programme)**: Disease outbreak data
-- **Ministry of Health and Family Welfare, India**: Health statistics
-- **WHO (World Health Organization)**: Disease information and guidelines
+- **IDSP (Integrated Disease Surveillance Programme)**: Disease outbreak data and surveillance reports
+- **Ministry of Health and Family Welfare, India**: National health statistics and guidelines
+- **WHO (World Health Organization)**: Disease information, classification, and global guidelines
+- **NVBDCP (National Vector Borne Disease Control Programme)**: Vector-borne disease data
+- **HMIS (Health Management Information System)**: Health facility data and indicators
+- **State Health Departments**: Regional disease outbreak reports
 
-### Technologies
+### Technologies & Open Source Libraries
 
-- **Next.js Team**: For the amazing React framework
-- **PyTorch Team**: For the deep learning framework
-- **FastAPI Team**: For the modern web framework
-- **Vercel**: For hosting and deployment platform
+- **Next.js Team**: For the powerful React framework with App Router
+- **PyTorch Team**: For the flexible deep learning framework
+- **FastAPI Team**: For the high-performance modern web framework
+- **Vercel**: For seamless hosting and deployment platform
 - **Tailwind Labs**: For the utility-first CSS framework
+- **Framer Motion**: For smooth and professional animations
+- **Recharts**: For beautiful and responsive data visualizations
+- **Lucide Icons**: For the comprehensive icon library
+- **React Team**: For the foundational UI library
 
 ### Inspiration
 
@@ -872,12 +971,17 @@ SOFTWARE.
 - Data scientists advancing ML in healthcare
 - Open-source community
 
-### Team
+### Development Team
 
-- **Developers**: [Your Team Names]
-- **ML Engineers**: [Your Team Names]
-- **UI/UX Designers**: [Your Team Names]
-- **Project Mentors**: [Mentor Names]
+This project was developed as part of a problem-based learning initiative to create AI-powered healthcare solutions for India.
+
+- **Full Stack Development**: Integration of ML models with web application
+- **Machine Learning**: LSTM model architecture and training
+- **UI/UX Design**: Modern, accessible, and multilingual interface
+- **Data Engineering**: Processing and cleaning of disease outbreak data
+- **Testing & QA**: Ensuring reliability and accuracy
+
+Special thanks to medical professionals who provided domain expertise and feedback.
 
 ---
 
@@ -886,9 +990,9 @@ SOFTWARE.
 ### Get Help
 
 - 📧 **Email**: support@nirogya.health
-- 💬 **Discord**: [Join our community](https://discord.gg/nirogya)
-- 🐦 **Twitter**: [@NirogyaHealth](https://twitter.com/nirogyahealth)
-- 📖 **Documentation**: [docs.nirogya.health](https://docs.nirogya.health)
+- 💬 **GitHub Discussions**: [Ask questions and share ideas](https://github.com/yourusername/nirogya/discussions)
+- 🐛 **Issues**: [Report bugs](https://github.com/yourusername/nirogya/issues)
+- 📖 **Documentation**: Comprehensive guides in repository docs/
 
 ### Report Issues
 
@@ -906,29 +1010,49 @@ Found a bug? Have a feature request?
 
 ## 🗺️ Roadmap
 
-### Version 2.0 (Q2 2024)
+### Version 2.1 (Current - In Development)
 
-- [ ] Mobile application (React Native)
-- [ ] Real-time outbreak alerts
-- [ ] Integration with government health systems
-- [ ] Advanced visualization dashboard
-- [ ] Multi-model ensemble predictions
+- [x] 6-language multilingual support (English, Hindi, Bengali, Assamese, Tamil, Telugu)
+- [x] Patient registration and management system
+- [x] All-India disease information page with comprehensive data
+- [x] Auto-rotating disease spotlight with manual navigation
+- [x] Interactive data visualization charts (4 types)
+- [x] Search and filter functionality for diseases
+- [x] Complete translation of all UI elements
+- [ ] SMS/Email notification system
+- [ ] WhatsApp integration for alerts
+- [ ] PDF report generation for predictions
 
-### Version 3.0 (Q4 2024)
+### Version 2.5 (Q2 2025)
 
-- [ ] Predictive analytics for resource allocation
-- [ ] Integration with hospital management systems
-- [ ] Public API for researchers
-- [ ] Machine learning model marketplace
-- [ ] Blockchain-based data verification
+- [ ] Mobile application (React Native/Flutter)
+- [ ] Real-time outbreak alert system
+- [ ] Push notifications for critical outbreaks
+- [ ] Advanced analytics dashboard for healthcare administrators
+- [ ] Integration with state health departments
+- [ ] Voice-based symptom input (expansion to all forms)
 
-### Future Enhancements
+### Version 3.0 (Q4 2025)
 
-- [ ] Climate data integration
-- [ ] Social media sentiment analysis
-- [ ] Genomic data analysis
-- [ ] Drug resistance prediction
-- [ ] Vaccine effectiveness tracking
+- [ ] Predictive analytics for resource allocation (beds, medicines, staff)
+- [ ] Integration with hospital management systems (HMS/HMIS)
+- [ ] Public API for researchers and institutions
+- [ ] Telemedicine integration for remote consultations
+- [ ] Vaccine tracker and immunization reminders
+- [ ] Community health worker mobile app
+
+### Future Enhancements (Research & Innovation)
+
+- [ ] Climate and weather data integration for outbreak correlation
+- [ ] Social media sentiment analysis for early outbreak detection
+- [ ] Genomic data analysis for pathogen tracking
+- [ ] Drug resistance prediction models
+- [ ] Vaccine effectiveness tracking and monitoring
+- [ ] Water quality monitoring integration
+- [ ] Vector (mosquito) density mapping
+- [ ] Migration pattern analysis for disease spread
+- [ ] AI-powered chatbot for health queries
+- [ ] Blockchain for secure health record management
 
 ---
 

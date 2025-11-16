@@ -120,13 +120,13 @@ const AllIndiaDiseaseData = () => {
           viewport={{ once: true }}
         >
           <h2 className="bold-40 lg:bold-52 text-gray-90 mb-6">
-            Disease Surveillance Data - All India
+            {t('surveillance.title')}
           </h2>
           <p className="regular-16 text-gray-50 max-w-3xl mx-auto mb-4">
-            Comprehensive disease monitoring data from across India. All statistics are sourced from official government health departments and national disease control programmes.
+            {t('surveillance.description')}
           </p>
           <p className="text-sm text-primary-600 font-medium">
-            Data updated regularly • Sources verified • 2023 Statistics
+            {t('surveillance.dataUpdated')} • {t('surveillance.sourcesVerified')} • {t('surveillance.statistics')}
           </p>
         </motion.div>
 
@@ -139,8 +139,8 @@ const AllIndiaDiseaseData = () => {
           viewport={{ once: true }}
         >
           <div className="mb-6">
-            <h3 className="bold-24 text-gray-90 mb-2">Regional Disease Distribution</h3>
-            <p className="regular-14 text-gray-50">Cases reported across different regions of India (2023)</p>
+            <h3 className="bold-24 text-gray-90 mb-2">{t('surveillance.regionalDistribution')}</h3>
+            <p className="regular-14 text-gray-50">{t('surveillance.casesReported')}</p>
             <a
               href="https://ncvbdc.mohfw.gov.in/"
               target="_blank"
@@ -186,8 +186,8 @@ const AllIndiaDiseaseData = () => {
             viewport={{ once: true }}
           >
             <div className="mb-6">
-              <h3 className="bold-24 text-gray-90 mb-2">Disease Burden Distribution</h3>
-              <p className="regular-14 text-gray-50">Total cases by disease type (2023)</p>
+              <h3 className="bold-24 text-gray-90 mb-2">{t('surveillance.diseaseBurden')}</h3>
+              <p className="regular-14 text-gray-50">{t('surveillance.totalCases')}</p>
               <a
                 href="https://hmis.mohfw.gov.in"
                 target="_blank"
@@ -236,8 +236,8 @@ const AllIndiaDiseaseData = () => {
             viewport={{ once: true }}
           >
             <div className="mb-6">
-              <h3 className="bold-24 text-gray-90 mb-2">5-Year Disease Trends</h3>
-              <p className="regular-14 text-gray-50">Annual case trends (2019-2023)</p>
+              <h3 className="bold-24 text-gray-90 mb-2">{t('surveillance.yearTrends')}</h3>
+              <p className="regular-14 text-gray-50">{t('surveillance.annualTrends')}</p>
               <a
                 href="https://mohfw.gov.in/"
                 target="_blank"

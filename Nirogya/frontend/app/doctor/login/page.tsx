@@ -62,7 +62,6 @@ const DoctorLoginPage = () => {
                 type="submit"
                 title="Login"
                 variant="btn_primary_dark"
-                full
             />
           </form>
         </motion.div>

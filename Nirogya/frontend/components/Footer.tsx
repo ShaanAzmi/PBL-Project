@@ -1,9 +1,14 @@
+'use client'
+
 import React from 'react'
 import Image from 'next/image'
 import Link from 'next/link'
 import { SOCIALS } from '@/constants'
+import { useLanguage } from '@/contexts/LanguageContext'
 
 const Footer = () => {
+  const { t } = useLanguage()
+  
   return (
     <footer className="bg-primary-500 py-16">
       <div className="max-container padding-container">
@@ -13,9 +18,7 @@ const Footer = () => {
             <Image src="/hilink-logo.svg" alt="Waterborne Disease Awareness" width={170} height={90} />
           </Link>
           <p className="regular-16 text-primary-100 mb-8 max-w-2xl leading-relaxed">
-            Dedicated to raising awareness about waterborne diseases and promoting
-            clean water access for communities in Northeast India. Together, we can prevent
-            waterborne illnesses and save lives.
+            {t('footer.description')}
           </p>
           <div className="flex gap-4 mb-8">
             {SOCIALS.links.map((link, index) => (
@@ -30,11 +33,11 @@ const Footer = () => {
         <div className="border-t border-primary-600 pt-8">
           <div className="flex flex-col md:flex-row justify-between items-center gap-4">
             <p className="regular-14 text-primary-200">
-              © 2025 Nirogya - Northeast India. All rights reserved.
+              {t('footer.copyright')}
             </p>
             <div className="flex gap-6">
               <Link href="/" className="regular-14 text-primary-200 hover:text-white transition-colors">
-                Privacy Policy
+                {t('footer.privacyPolicy')}
               </Link>
             </div>
           </div>

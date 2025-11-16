@@ -4,6 +4,7 @@ import React, { useState, useEffect } from 'react'
 import axios from 'axios'
 import { motion } from 'framer-motion'
 import { FlaskConical, AlertTriangle, Bug, Target, Sparkles, Lightbulb, Calendar } from 'lucide-react'
+import { useLanguage } from '@/contexts/LanguageContext'
 
 interface MLPredictionResponse {
   predicted_cases: number
@@ -16,6 +17,8 @@ interface MLPredictionResponse {
 }
 
 const Prediction = () => {
+  const { t } = useLanguage()
+  
   // ML Model V2 state
   const [mlFormData, setMlFormData] = useState({
     region: '',
@@ -100,10 +103,10 @@ const Prediction = () => {
           <div className="p-2 bg-gradient-to-br from-cyan-500 to-blue-600 rounded-lg">
             <Target className="w-6 h-6 text-white" />
           </div>
-          <h2 className="bold-28 text-gray-90">Disease Outbreak Prediction</h2>
+          <h2 className="bold-28 text-gray-90">{t('prediction.title')}</h2>
         </div>
         <p className="text-gray-60 regular-14 ml-14">
-          Predict future disease outbreaks using advanced AI models and historical data
+          {t('prediction.subtitle')}
         </p>
       </div>
 
@@ -114,9 +117,9 @@ const Prediction = () => {
             <div className="flex items-start gap-3">
               <Lightbulb className="w-5 h-5 text-blue-600 flex-shrink-0 mt-0.5" />
               <div>
-                <h4 className="font-semibold text-gray-90 mb-1">How it works</h4>
+                <h4 className="font-semibold text-gray-90 mb-1">{t('prediction.howItWorks')}</h4>
                 <p className="text-sm text-gray-70">
-                  Our advanced LSTM AI model analyzes 7 days of historical case data to predict the next day's outbreak cases with 95% confidence intervals. Simply select a region and disease, enter the case data, and get instant predictions!
+                  {t('prediction.howItWorksDesc')}
                 </p>
               </div>
             </div>
@@ -128,7 +131,7 @@ const Prediction = () => {
               <div className="w-8 h-8 bg-cyan-600 text-white rounded-full flex items-center justify-center font-bold">
                 1
               </div>
-              <h3 className="bold-20 text-gray-90">Select Location & Disease</h3>
+              <h3 className="bold-20 text-gray-90">{t('prediction.stepOne')}</h3>
             </div>
 
             <div className="grid grid-cols-1 md:grid-cols-2 gap-5">
@@ -137,7 +140,7 @@ const Prediction = () => {
                   <svg className="w-4 h-4" fill="currentColor" viewBox="0 0 20 20">
                     <path fillRule="evenodd" d="M5.05 4.05a7 7 0 119.9 9.9L10 18.9l-4.95-4.95a7 7 0 010-9.9zM10 11a2 2 0 100-4 2 2 0 000 4z" clipRule="evenodd" />
                   </svg>
-                  Region (State & District)
+                  {t('prediction.region')}
                 </label>
                 <select
                   name="region"
@@ -162,7 +165,7 @@ const Prediction = () => {
               <div>
                 <label className="flex items-center gap-2 font-semibold text-gray-80 mb-2">
                   <Bug className="w-4 h-4" />
-                  Disease Type
+                  {t('prediction.disease')}
                 </label>
                 <select
                   name="disease"
@@ -192,19 +195,19 @@ const Prediction = () => {
               <div className="w-8 h-8 bg-blue-600 text-white rounded-full flex items-center justify-center font-bold">
                 2
               </div>
-              <h3 className="bold-20 text-gray-90">Enter 7-Day Historical Data</h3>
+              <h3 className="bold-20 text-gray-90">{t('prediction.stepTwo')}</h3>
             </div>
             <p className="text-sm text-gray-700 mb-5 ml-10">
-              Enter the number of reported cases for each of the past 7 days. <span className="font-semibold">Day 1 = oldest</span>, <span className="font-semibold">Day 7 = most recent</span>.
+              {t('prediction.dataHelp')}
             </p>
 
             {/* Past Week */}
             <div className="mb-4 ml-10">
-              <div className="text-xs font-semibold text-gray-600 mb-2 uppercase tracking-wide">Past Week</div>
+              <div className="text-xs font-semibold text-gray-600 mb-2 uppercase tracking-wide">{t('prediction.last7Days')}</div>
               <div className="grid grid-cols-2 md:grid-cols-4 lg:grid-cols-7 gap-3">
                 {mlFormData.last_14_days_cases.map((cases, index) => (
                   <div key={index} className="relative">
-                    <label className="block text-xs font-medium text-gray-700 mb-1.5">Day {index + 1}</label>
+                    <label className="block text-xs font-medium text-gray-700 mb-1.5">{t('prediction.day')} {index + 1}</label>
                     <input
                       type="number"
                       min="0"
@@ -245,12 +248,12 @@ const Prediction = () => {
                     <circle className="opacity-25" cx="12" cy="12" r="10" stroke="currentColor" strokeWidth="4" fill="none" />
                     <path className="opacity-75" fill="currentColor" d="M4 12a8 8 0 018-8V0C5.373 0 0 5.373 0 12h4zm2 5.291A7.962 7.962 0 014 12H0c0 3.042 1.135 5.824 3 7.938l3-2.647z" />
                   </svg>
-                  Analyzing Data...
+                  {t('prediction.predicting')}
                 </span>
               ) : (
                 <span className="flex items-center justify-center gap-2">
                   <Sparkles className="w-5 h-5" />
-                  Get AI Prediction
+                  {t('prediction.predictButton')}
                 </span>
               )}
             </button>
@@ -262,7 +265,7 @@ const Prediction = () => {
         <div className="mt-4 p-4 bg-red-50 border border-red-200 rounded-lg">
           <p className="text-red-600 font-medium flex items-center gap-2">
             <AlertTriangle className="w-4 h-4" />
-            ML Prediction Error
+            {t('prediction.errorTitle')}
           </p>
           <p className="text-red-500 text-sm mt-1">{mlError}</p>
         </div>
@@ -284,12 +287,12 @@ const Prediction = () => {
                   <Sparkles className="w-8 h-8" />
                 </div>
                 <div>
-                  <h2 className="bold-24">Prediction Complete!</h2>
+                  <h2 className="bold-24">{t('prediction.results')}</h2>
                   <p className="text-sm text-green-100">AI analysis successfully generated</p>
                 </div>
               </div>
               <div className="text-right">
-                <p className="text-xs text-green-100">Prediction Date</p>
+                <p className="text-xs text-green-100">{t('prediction.predictionFor')}</p>
                 <p className="font-semibold flex items-center gap-1 justify-end">
                   <Calendar className="w-4 h-4" />
                   {mlPrediction.prediction_date}
@@ -321,7 +324,7 @@ const Prediction = () => {
               <div className="bg-gradient-to-br from-blue-50 to-indigo-50 p-5 rounded-xl border border-blue-200">
                 <div className="flex items-center gap-2 mb-2">
                   <FlaskConical className="w-5 h-5 text-blue-600" />
-                  <h4 className="font-semibold text-gray-700">AI Model</h4>
+                  <h4 className="font-semibold text-gray-700">{t('prediction.modelVersion')}</h4>
                 </div>
                 <p className="bold-16 text-blue-700">{mlPrediction.model_version}</p>
               </div>
@@ -332,7 +335,7 @@ const Prediction = () => {
               <div className="text-center mb-6">
                 <h3 className="bold-24 text-gray-90 mb-2 flex items-center justify-center gap-2">
                   <Target className="w-6 h-6 text-cyan-600" />
-                  Next Day Outbreak Prediction
+                  {t('prediction.predictedCases')}
                 </h3>
                 <p className="text-sm text-gray-600">Based on 14-day historical trend analysis</p>
               </div>

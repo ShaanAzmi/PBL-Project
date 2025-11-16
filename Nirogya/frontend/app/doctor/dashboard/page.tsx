@@ -7,9 +7,11 @@ import RecordBook from '@/components/RecordBook'
 import DoctorProfile from '@/components/DoctorProfile'
 import PatientRecords from '@/components/PatientRecords'
 import { Activity, Database, TrendingUp, Info, Users } from 'lucide-react'
+import { useLanguage } from '@/contexts/LanguageContext'
 
 const DoctorDashboardPage = () => {
   const [activeSection, setActiveSection] = useState<'prediction' | 'records' | 'patients'>('prediction')
+  const { t } = useLanguage()
 
   return (
     <section className="min-h-screen bg-gradient-to-br from-cyan-50 via-blue-50 to-teal-50 py-12">
@@ -26,8 +28,8 @@ const DoctorDashboardPage = () => {
               <Activity className="w-8 h-8 text-white" />
             </div>
             <div>
-              <h1 className="bold-40 text-gray-90">Doctor Dashboard</h1>
-              <p className="text-gray-60 regular-16">Disease Outbreak Prediction & Patient Management System</p>
+              <h1 className="bold-40 text-gray-90">{t('doctor.dashboard')}</h1>
+              <p className="text-gray-60 regular-16">{t('doctor.subtitle')}</p>
             </div>
           </div>
 
@@ -42,7 +44,7 @@ const DoctorDashboardPage = () => {
               <Info className="w-5 h-5 text-blue-600 flex-shrink-0 mt-0.5" />
               <div>
                 <p className="text-sm text-gray-70">
-                  <span className="font-semibold">Welcome to the dashboard!</span> Use the ML Model V2 to predict disease outbreaks, browse disease records, and manage patient information all in one place.
+                  <span className="font-semibold">{t('doctor.welcome')}</span> {t('doctor.welcomeDesc')}
                 </p>
               </div>
             </div>
@@ -68,7 +70,7 @@ const DoctorDashboardPage = () => {
             }`}
           >
             <TrendingUp className="w-5 h-5" />
-            <span>Disease Prediction</span>
+            <span>{t('doctor.diseasePrediction')}</span>
           </button>
           <button
             onClick={() => setActiveSection('records')}
@@ -79,7 +81,7 @@ const DoctorDashboardPage = () => {
             }`}
           >
             <Database className="w-5 h-5" />
-            <span>Disease Records</span>
+            <span>{t('doctor.diseaseRecords')}</span>
           </button>
           <button
             onClick={() => setActiveSection('patients')}
@@ -90,7 +92,7 @@ const DoctorDashboardPage = () => {
             }`}
           >
             <Users className="w-5 h-5" />
-            <span>Patient Records</span>
+            <span>{t('doctor.patientRecords')}</span>
           </button>
         </motion.div>
 

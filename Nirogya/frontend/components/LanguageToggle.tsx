@@ -50,7 +50,7 @@ const LanguageToggle = () => {
             animate={{ opacity: 1, y: 0, scale: 1 }}
             exit={{ opacity: 0, y: -10, scale: 0.95 }}
             transition={{ duration: 0.2 }}
-            className="absolute top-full mt-2 right-0 bg-white border border-primary-200 rounded-xl shadow-lg overflow-hidden z-50 min-w-[200px]"
+            className="absolute top-full mt-2 right-0 bg-white border border-primary-200 rounded-xl shadow-xl overflow-hidden z-[100] min-w-[200px]"
           >
             <div className="py-2">
               {languages.map((language) => (
@@ -88,13 +88,6 @@ const LanguageToggle = () => {
                   )}
                 </motion.button>
               ))}
-            </div>
-            
-            {/* Language Info Footer */}
-            <div className="border-t border-primary-100 px-4 py-3 bg-primary-25">
-              <p className="text-xs text-primary-600 text-center">
-                Northeast India Languages
-              </p>
             </div>
           </motion.div>
         )}

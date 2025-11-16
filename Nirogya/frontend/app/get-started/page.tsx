@@ -42,7 +42,7 @@ const GetStartedPage = () => {
     e.preventDefault()
 
     if (!formData.name.trim() || !formData.phone.trim() || !formData.symptoms.trim()) {
-      alert('Please fill in all required fields (Name, Phone, and Symptoms)')
+      alert(t('getStarted.fillRequired'))
       return
     }
 
@@ -83,7 +83,7 @@ const GetStartedPage = () => {
 
     } catch (error) {
       console.error('Error submitting patient data:', error)
-      alert('Sorry, there was an error submitting your information. Please try again.')
+      alert(t('getStarted.errorSubmit'))
     } finally {
       setIsLoading(false)
     }
@@ -96,7 +96,7 @@ const GetStartedPage = () => {
         <div className="w-full px-4 py-4">
           <Link href="/" className="inline-flex items-center gap-2 px-4 py-2 rounded-lg transition-all duration-300 hover:bg-cyan-600 group">
             <ArrowLeft className="w-5 h-5 text-cyan-600 group-hover:text-white transition-colors duration-300" />
-            <span className="text-cyan-600 font-semibold group-hover:text-white transition-colors duration-300">Back to Home</span>
+            <span className="text-cyan-600 font-semibold group-hover:text-white transition-colors duration-300">{t('getStarted.backToHome')}</span>
           </Link>
         </div>
       </header>
@@ -110,13 +110,13 @@ const GetStartedPage = () => {
               <User className="w-10 h-10 text-cyan-600" />
             </div>
             <h1 className="bold-40 lg:bold-52 text-gray-90 mb-4">
-              Patient Registration
+              {t('getStarted.patientRegistration')}
             </h1>
             <p className="regular-18 text-gray-50 max-w-2xl mx-auto mb-2">
-              Your health and well-being matter to us. Please share some basic information so we can provide you with the most relevant guidance and support.
+              {t('getStarted.title')}
             </p>
             <p className="regular-16 text-cyan-600 italic">
-              This tool provides general health information and is not a substitute for professional medical advice.
+              {t('getStarted.disclaimer')}
             </p>
           </div>
 
@@ -127,12 +127,12 @@ const GetStartedPage = () => {
                 <div className="inline-flex items-center justify-center w-20 h-20 bg-green-100 rounded-full mb-6">
                   <CheckCircle className="w-12 h-12 text-green-600" />
                 </div>
-                <h2 className="bold-32 text-gray-90 mb-4">Registration Successful!</h2>
+                <h2 className="bold-32 text-gray-90 mb-4">{t('getStarted.successTitle')}</h2>
                 <p className="regular-18 text-gray-60 mb-6">
-                  Your information has been submitted successfully. Our medical team will review your case shortly.
+                  {t('getStarted.successMessage')}
                 </p>
                 <p className="regular-16 text-gray-50">
-                  Status: <span className="font-semibold text-cyan-600">Incoming</span>
+                  {t('getStarted.status')}: <span className="font-semibold text-cyan-600">{t('getStarted.incoming')}</span>
                 </p>
               </div>
             ) : (
@@ -141,7 +141,7 @@ const GetStartedPage = () => {
                 <div>
                   <label htmlFor="name" className="flex items-center gap-2 bold-18 text-gray-90 mb-3">
                     <User className="w-5 h-5 text-cyan-600" />
-                    Full Name <span className="text-red-500">*</span>
+                    {t('getStarted.fullName')} <span className="text-red-500">*</span>
                   </label>
                   <input
                     type="text"
@@ -149,7 +149,7 @@ const GetStartedPage = () => {
                     name="name"
                     value={formData.name}
                     onChange={handleInputChange}
-                    placeholder="Enter your full name"
+                    placeholder={t('getStarted.namePlaceholder')}
                     className="w-full px-6 py-4 border-2 border-cyan-200 rounded-xl focus:border-cyan-400 focus:outline-none transition-colors regular-16 bg-gray-10"
                     required
                   />
@@ -159,7 +159,7 @@ const GetStartedPage = () => {
                 <div>
                   <label htmlFor="phone" className="flex items-center gap-2 bold-18 text-gray-90 mb-3">
                     <Phone className="w-5 h-5 text-cyan-600" />
-                    Phone Number <span className="text-red-500">*</span>
+                    {t('getStarted.phoneNumber')} <span className="text-red-500">*</span>
                   </label>
                   <input
                     type="tel"
@@ -167,7 +167,7 @@ const GetStartedPage = () => {
                     name="phone"
                     value={formData.phone}
                     onChange={handleInputChange}
-                    placeholder="Enter your phone number"
+                    placeholder={t('getStarted.phonePlaceholder')}
                     className="w-full px-6 py-4 border-2 border-cyan-200 rounded-xl focus:border-cyan-400 focus:outline-none transition-colors regular-16 bg-gray-10"
                     required
                   />
@@ -177,7 +177,7 @@ const GetStartedPage = () => {
                 <div>
                   <label htmlFor="email" className="flex items-center gap-2 bold-18 text-gray-90 mb-3">
                     <Mail className="w-5 h-5 text-cyan-600" />
-                    Email Address
+                    {t('getStarted.email')}
                   </label>
                   <input
                     type="email"
@@ -185,7 +185,7 @@ const GetStartedPage = () => {
                     name="email"
                     value={formData.email}
                     onChange={handleInputChange}
-                    placeholder="Enter your email address"
+                    placeholder={t('getStarted.emailPlaceholder')}
                     className="w-full px-6 py-4 border-2 border-cyan-200 rounded-xl focus:border-cyan-400 focus:outline-none transition-colors regular-16 bg-gray-10"
                   />
                 </div>
@@ -194,7 +194,7 @@ const GetStartedPage = () => {
                 <div>
                   <label htmlFor="address" className="flex items-center gap-2 bold-18 text-gray-90 mb-3">
                     <MapPin className="w-5 h-5 text-cyan-600" />
-                    Address
+                    {t('getStarted.address')}
                   </label>
                   <input
                     type="text"
@@ -202,7 +202,7 @@ const GetStartedPage = () => {
                     name="address"
                     value={formData.address}
                     onChange={handleInputChange}
-                    placeholder="Enter your address"
+                    placeholder={t('getStarted.addressPlaceholder')}
                     className="w-full px-6 py-4 border-2 border-cyan-200 rounded-xl focus:border-cyan-400 focus:outline-none transition-colors regular-16 bg-gray-10"
                   />
                 </div>
@@ -211,7 +211,7 @@ const GetStartedPage = () => {
                 <div>
                   <label htmlFor="symptoms" className="flex items-center gap-2 bold-18 text-gray-90 mb-3">
                     <FileText className="w-5 h-5 text-cyan-600" />
-                    Describe Your Symptoms <span className="text-red-500">*</span>
+                    {t('getStarted.symptoms')} <span className="text-red-500">*</span>
                   </label>
                   <div className="mb-4">
                     <p className="regular-14 text-gray-50 mb-2">You can mention things like:</p>
@@ -232,7 +232,7 @@ const GetStartedPage = () => {
                     name="symptoms"
                     value={formData.symptoms}
                     onChange={handleInputChange}
-                    placeholder="Please describe what you're experiencing in detail..."
+                    placeholder={t('getStarted.symptomsPlaceholder')}
                     rows={8}
                     className="w-full px-6 py-4 border-2 border-cyan-200 rounded-xl focus:border-cyan-400 focus:outline-none transition-colors regular-16 bg-gray-10 resize-none"
                     required
